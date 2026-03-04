@@ -1,0 +1,141 @@
+{
+    "selected": "0",
+    "act": 3,
+    "configs": {
+        "0": {
+            "Units": {
+                "1": {
+                    "placements": [
+                        [
+                            406,
+                            295
+                        ]
+                    ],
+                    "upgrades": [
+                        [
+                            0,
+                            "AUTO"
+                        ]
+                    ],
+                    "abilities": [
+                        [
+                            0,
+                            "BROOK",
+                            null
+                        ],
+                        [
+                            0,
+                            "SECOND",
+                            13
+                        ]
+                    ]
+                },
+                "2": {
+                    "placements": [
+                        [
+                            50,
+                            50
+                        ],
+                        [
+                            60,
+                            60
+                        ]
+                    ],
+                    "upgrades": [
+                        [
+                            0,
+                            5
+                        ],
+                        [
+                            0,
+                            "MAX"
+                        ]
+                    ],
+                    "abilities": [
+                        []
+                    ]
+                },
+                "3": {
+                    "placements": [
+                        []
+                    ],
+                    "upgrades": [
+                        []
+                    ],
+                    "abilities": [
+                        []
+                    ]
+                },
+                "4": {
+                    "placements": [
+                        [406,323]
+                    ],
+                    "upgrades": [
+                        []
+                    ],
+                    "abilities": [
+                        [0,"BROOK",null]
+                    ]
+                },
+                "5": {
+                    "placements": [
+                        [
+                            50,
+                            50
+                        ],
+                        [
+                            60,
+                            60
+                        ]
+                    ],
+                    "upgrades": [
+                        [],
+                        []
+                    ],
+                    "abilities": [
+                        []
+                    ]
+                },
+                "6": {
+                    "placements": [
+                        []
+                    ],
+                    "upgrades": [
+                        []
+                    ],
+                    "abilities": [
+                        []
+                    ]
+                },
+                "7": {
+                    "placements": [
+                        [
+                            100,
+                            100
+                        ]
+                    ],
+                    "upgrades": [
+                        []
+                    ],
+                    "abilities": [
+                        []
+                    ]
+                }
+            },
+            "Order": [
+                [
+                    "place",
+                    4,
+                    0
+                ],
+                [
+                    "ability",
+                    4,
+                    0
+                ]
+            ],
+            "Caloric_Unit": "God",
+            "Auto_Pos": false
+        }
+    }
+}

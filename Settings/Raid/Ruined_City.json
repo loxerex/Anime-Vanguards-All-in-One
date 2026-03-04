@@ -1,0 +1,157 @@
+{
+    "selected": "0",
+    "act": 2,
+    "configs": {
+        "0": {
+            "Units": {
+                "1": {
+                    "placements": [
+                        [
+                            404,
+                            451
+                        ]
+                    ],
+                    "upgrades": [
+                        [
+                            0,
+                            "AUTO"
+                        ]
+                    ],
+                    "abilities": [
+                        [
+                            0,
+                            "PRIDEBURN_1",
+                            null
+                        ]
+                    ]
+                },
+                "2": {
+                    "placements": [
+                        [
+                            50,
+                            50
+                        ],
+                        [
+                            60,
+                            60
+                        ]
+                    ],
+                    "upgrades": [
+                        [
+                            0,
+                            5
+                        ],
+                        [
+                            0,
+                            "MAX"
+                        ]
+                    ],
+                    "abilities": [
+                        []
+                    ]
+                },
+                "3": {
+                    "placements": [
+                        []
+                    ],
+                    "upgrades": [
+                        []
+                    ],
+                    "abilities": [
+                        []
+                    ]
+                },
+                "4": {
+                    "placements": [
+                        []
+                    ],
+                    "upgrades": [
+                        []
+                    ],
+                    "abilities": [
+                        []
+                    ]
+                },
+                "5": {
+                    "placements": [
+                        [
+                            50,
+                            50
+                        ],
+                        [
+                            60,
+                            60
+                        ]
+                    ],
+                    "upgrades": [
+                        [],
+                        []
+                    ],
+                    "abilities": [
+                        []
+                    ]
+                },
+                "6": {
+                    "placements": [
+                        []
+                    ],
+                    "upgrades": [
+                        []
+                    ],
+                    "abilities": [
+                        []
+                    ]
+                },
+                "7": {
+                    "placements": [
+                        [
+                            100,
+                            100
+                        ]
+                    ],
+                    "upgrades": [
+                        []
+                    ],
+                    "abilities": [
+                        []
+                    ]
+                }
+            },
+            "Order": [
+                [
+                    "wfs",
+                    0,
+                    0
+                ],
+                [
+                    "ability",
+                    1,
+                    0
+                ],
+                [
+                    "start",
+                    0,
+                    0
+                ],
+                [
+                    "place_a_5",
+                    1,
+                    0
+                ],
+                [
+                    "cid_number",
+                    0,
+                    0
+                ],
+                [
+                    "cid_number",
+                    0,
+                    0
+                ]
+            ],
+            "Caloric_Unit": "God",
+            "Auto_Pos": false,
+            "top_down_unit": 5
+        }
+    }
+}

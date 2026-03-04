@@ -1,0 +1,161 @@
+{
+    "selected": "0",
+    "act": 4,
+    "configs": {
+        "0": {
+            "Units": {
+                "1": {
+                    "placements": [
+                        [
+                            406,
+                            295
+                        ]
+                    ],
+                    "upgrades": [
+                        [
+                            0,
+                            "AUTO"
+                        ]
+                    ],
+                    "abilities": [
+                        [
+                            0,
+                            "PRIDEBURN_1",
+                            null
+                        ],
+                        [
+                            0,
+                            "SECOND",
+                            13
+                        ]
+                    ]
+                },
+                "2": {
+                    "placements": [
+                        [
+                            50,
+                            50
+                        ],
+                        [
+                            60,
+                            60
+                        ]
+                    ],
+                    "upgrades": [
+                        [
+                            0,
+                            5
+                        ],
+                        [
+                            0,
+                            "MAX"
+                        ]
+                    ],
+                    "abilities": [
+                        []
+                    ]
+                },
+                "3": {
+                    "placements": [
+                        []
+                    ],
+                    "upgrades": [
+                        []
+                    ],
+                    "abilities": [
+                        []
+                    ]
+                },
+                "4": {
+                    "placements": [
+                        []
+                    ],
+                    "upgrades": [
+                        []
+                    ],
+                    "abilities": [
+                        []
+                    ]
+                },
+                "5": {
+                    "placements": [
+                        [
+                            50,
+                            50
+                        ],
+                        [
+                            60,
+                            60
+                        ]
+                    ],
+                    "upgrades": [
+                        [],
+                        []
+                    ],
+                    "abilities": [
+                        []
+                    ]
+                },
+                "6": {
+                    "placements": [
+                        []
+                    ],
+                    "upgrades": [
+                        []
+                    ],
+                    "abilities": [
+                        []
+                    ]
+                },
+                "7": {
+                    "placements": [
+                        [
+                            100,
+                            100
+                        ]
+                    ],
+                    "upgrades": [
+                        []
+                    ],
+                    "abilities": [
+                        []
+                    ]
+                }
+            },
+            "Order": [
+                [
+                    "wfs",
+                    0,
+                    0
+                ],
+                [
+                    "ability",
+                    1,
+                    0
+                ],
+                [
+                    "start",
+                    0,
+                    0
+                ],
+                [
+                    "place",
+                    1,
+                    0
+                ],
+                [
+                    "upgrade",
+                    1,
+                    0
+                ],
+                [
+                    "ability",
+                    1,
+                    1
+                ]
+            ],
+            "Caloric_Unit": "God",
+            "Auto_Pos": true
+        }
+    }
+}

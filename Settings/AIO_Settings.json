@@ -1,0 +1,47 @@
+{
+    "Position_Key": "f1",
+    "Start_Key": "f3",
+    "Stop_Key": "f4",
+    "Debug_Key": "f5",
+    "Click_Chat": true,
+    "VC_CHAT": false,
+    "Unit_Settings":{
+        "Placement_Delay": 1.0
+    },
+    "Settings": {
+        "WaveNumbers": 2,
+        "Challenge_Card": "Champ",
+        "Wait_Start_Timeout": 90,
+        "Webhook": "",
+        "Private_Server_Code": "21768692868330557785126702085399"
+    },
+    "Frozen_Volcano": {
+        "Frozen_Volcano_Card": "Tyrant_Arrives",
+        "FV_Card_Priority": [
+            "Champ",
+            "Slayer",
+            "Strong",
+            "Fast",
+            "Loot",
+            "Dodge",
+            "Damage",
+            "Range",
+            "Cooldown",
+            "Press_It"
+        ]
+    },
+    "Ant_Island": {
+        "Ant_Island_Card": "Exterminator",
+        "AI_Card_Priority": [
+            "Champ",
+            "Strong",
+            "Fast",
+            "Dodge",
+            "Range",
+            "Damage",
+            "Slayer",
+            "Cooldown",
+            "Press_It"
+        ]
+    }
+}

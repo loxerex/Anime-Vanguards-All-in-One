@@ -1,0 +1,279 @@
+{
+    "selected": "0",
+    "act": 4,
+    "configs": {
+        "0": {
+            "Units": {
+                "1": {
+                    "placements": [
+                        [
+                            452,
+                            372
+                        ]
+                    ],
+                    "upgrades": [
+                        [
+                            0,
+                            "AUTO"
+                        ]
+                    ],
+                    "abilities": [
+                        [
+                            0,
+                            "AINZ_SPELLS_PASSION2_WATER2",
+                            null
+                        ],
+                        [
+                            0,
+                            "AINZ_WORLDITEM_CALORIC",
+                            null
+                        ]
+                    ]
+                },
+                "2": {
+                    "placements": [
+                        [
+                            359,
+                            323
+                        ]
+                    ],
+                    "upgrades": [
+                        [
+                            0,
+                            "AUTO"
+                        ]
+                    ],
+                    "abilities": [
+                        [
+                            0,
+                            "BASE_AUTO",
+                            null
+                        ]
+                    ]
+                },
+                "3": {
+                    "placements": [
+                        [
+                            456,
+                            324
+                        ]
+                    ],
+                    "upgrades": [
+                        [
+                            0,
+                            "AUTO"
+                        ]
+                    ],
+                    "abilities": [
+                        [
+                            0,
+                            "BASE_AUTO",
+                            null
+                        ]
+                    ]
+                },
+                "4": {
+                    "placements": [
+                        [
+                            439,
+                            327
+                        ]
+                    ],
+                    "upgrades": [
+                        []
+                    ],
+                    "abilities": [
+                        [
+                            0,
+                            "BROOK",
+                            null
+                        ]
+                    ]
+                },
+                "5": {
+                    "placements": [
+                        [
+                            360,
+                            387
+                        ]
+                    ],
+                    "upgrades": [
+                        [
+                            0,
+                            "AUTO"
+                        ]
+                    ],
+                    "abilities": [
+                        [
+                            0,
+                            "BASE",
+                            null
+                        ]
+                    ]
+                },
+                "6": {
+                    "placements": [
+                        [
+                            367,
+                            180
+                        ],
+                        [
+                            406,
+                            183
+                        ]
+                    ],
+                    "upgrades": [
+                        [
+                            0,
+                            "AUTO"
+                        ],
+                        [
+                            1,
+                            "MAX"
+                        ]
+                    ],
+                    "abilities": [
+                        []
+                    ]
+                },
+                "7": {
+                    "placements": [
+                        [
+                            365,
+                            370
+                        ]
+                    ],
+                    "upgrades": [
+                        []
+                    ],
+                    "abilities": [
+                        [
+                            0,
+                            "MAGE_3",
+                            null
+                        ]
+                    ]
+                }
+            },
+            "Order": [
+                [
+                    "wfs",
+                    0,
+                    0
+                ],
+                [
+                    "start",
+                    0,
+                    0
+                ],
+                [
+                    "place",
+                    6,
+                    0
+                ],
+                [
+                    "upgrade",
+                    6,
+                    0
+                ],
+                [
+                    "place",
+                    1,
+                    0
+                ],
+                [
+                    "ability",
+                    1,
+                    0
+                ],
+                [
+                    "ability",
+                    1,
+                    1
+                ],
+                [
+                    "place",
+                    6,
+                    1
+                ],
+                [
+                    "upgrade",
+                    6,
+                    1
+                ],
+                [
+                    "place",
+                    3,
+                    0
+                ],
+                [
+                    "ability",
+                    3,
+                    0
+                ],
+                [
+                    "place",
+                    2,
+                    0
+                ],
+                [
+                    "ability",
+                    2,
+                    0
+                ],
+                [
+                    "place",
+                    4,
+                    0
+                ],
+                [
+                    "place",
+                    5,
+                    0
+                ],
+                [
+                    "ability",
+                    7,
+                    0
+                ],
+                [
+                    "upgrade",
+                    1,
+                    0
+                ],
+                [
+                    "upgrade",
+                    3,
+                    0
+                ],
+                [
+                    "upgrade",
+                    2,
+                    0
+                ],
+                [
+                    "upgrade",
+                    5,
+                    0
+                ],
+                [
+                    "ability",
+                    4,
+                    0
+                ],
+                [
+                    "wfw",
+                    0,
+                    25
+                ],
+                [
+                    "ability",
+                    4,
+                    0
+                ]
+            ],
+            "Caloric_Unit": "Armor",
+            "Auto_Pos": false
+        }
+    }
+}
