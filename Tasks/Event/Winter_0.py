@@ -492,6 +492,7 @@ def place_hotbar_units():
     while placing:
         is_unit = False
         for unit in Units_Placeable:
+            keyboard.press_and_release('e')
             while not load_state()["running"]:
                 time.sleep(0.5)
             if fd.does_exist(f"Winter\\{unit}.png", confidence=0.8, grayscale=False,region=hotbar_region):
@@ -783,6 +784,8 @@ def main():
                 time.sleep(0.5)
             if check_return():
                 qrts()
+                time.sleep(1)
+                keyboard.press_and_release('e')
                 time.sleep(2)
                 place_hotbar_units()
                 path_winter(3,0)
@@ -1003,11 +1006,8 @@ def main():
         fd.restart_match(offset)
         time.sleep(1)
 
-#keyboard.press_and_release("w")
-#keyboard.press_and_release("a")    
-#keyboard.press_and_release("s")
-#keyboard.press_and_release("d")
-#main()
-while True:
-    print(fd.get_wave(offset))
-    time.sleep(1)
+keyboard.press_and_release("w")
+keyboard.press_and_release("a")    
+keyboard.press_and_release("s")
+keyboard.press_and_release("d")
+main()
