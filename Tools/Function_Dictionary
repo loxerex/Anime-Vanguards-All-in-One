@@ -240,7 +240,9 @@ def place_unit(unit: int, pos : tuple[int,int], offset: tuple[int,int], priority
     print(f"Placed {unit} at {pos}")
     
 def upgrade_unit(upgrade: str, pos : tuple[int,int], offset: tuple[int,int]):
-    select_unit(pos, offset)
+    selected = select_unit(pos, offset)
+    if not selected:
+        return False
     can_upgrade_color = (0, 228, 27)
     try:
         if upgrade.lower() !="max" and upgrade.lower() != "auto":
@@ -248,7 +250,9 @@ def upgrade_unit(upgrade: str, pos : tuple[int,int], offset: tuple[int,int]):
             upgrades = 0
             while upgrades < upgrade:
                 if not pyautogui.pixel(305+offset[0], 233+offset[1]) == (255,255,255) and not does_exist("Unit_Open.png", confidence=0.8, grayscale=True, region=(100+offset[0],400+offset[1], 153, 416)):
-                    select_unit(pos, offset)
+                    selec = select_unit(pos, offset)
+                    if not selec:
+                        return False
                 if does_exist("Victory.png",confidence=0.9,grayscale=True,region=(147+offset[0], 150+offset[1], 226+offset[0], 175+offset[1])) or does_exist("Failed.png",confidence=0.9,grayscale=True,region=(147+offset[0], 150+offset[1], 226+offset[0], 175+offset[1])):
                     break
                 if does_exist("Unit_Max.png", confidence=0.8, grayscale=True, region=(100+offset[0],400+offset[1], 153, 416)):
@@ -274,11 +278,14 @@ def upgrade_unit(upgrade: str, pos : tuple[int,int], offset: tuple[int,int]):
     
   
 def sell_unit(pos : tuple[int,int], offset: tuple[int,int]):
-    select_unit(pos, offset)
+    select = select_unit(pos, offset)
+    if not select:
+        return False
     keyboard.press_and_release('x')
     print(f"Sold unit at {pos}")      
     
 def select_unit(unit: tuple[int,int], offset: tuple[int,int]):
+    timeout = 28
     while not pyautogui.pixel(305+offset[0], 233+offset[1]) == (255,255,255) and not does_exist("Unit_Open.png", confidence=0.8, grayscale=True, region=(100+offset[0],400+offset[1], 153, 416)):
         if does_exist("Victory.png",confidence=0.9,grayscale=True,region=(147+offset[0], 150+offset[1], 226+offset[0], 175+offset[1])) or does_exist("Failed.png",confidence=0.9,grayscale=True,region=(147+offset[0], 150+offset[1], 226+offset[0], 175+offset[1])):
             break
@@ -286,8 +293,13 @@ def select_unit(unit: tuple[int,int], offset: tuple[int,int]):
             while not load_state()["running"]:
                 time.sleep(0.5)
         click(unit[0]+offset[0], unit[1]+offset[1], delay=0.67)
+        if timeout <= 0:
+            print("select unit timeout failure")
+            return False
         time.sleep(0.8)
+        timeout-=1
     print(f"Selected {unit}")    
+    return True
 
 def auto_positioner(positioner: str, offset: tuple[int,int], just_camera: bool | None=None, no_restart: bool | None=None, zoom: bool | None=None):
     print("Starting auto positioner")
@@ -344,7 +356,9 @@ def return_to_spawn(offset: tuple[int,int]):
 def use_ability(pos: tuple[int,int], ability: str, offset: tuple[int,int]):
     print(f"Using Ability {ability} at {pos}, offset: {offset}")
     if "PRIDEBURN" not in ability.upper().split('_')[0]:
-        select_unit(pos, offset)
+        selected = select_unit(pos, offset)
+        if not selected:
+            return False
     base_ability = (336, 279)
     second_ability =  (335, 333)
     third_ability = (336, 384)
@@ -830,7 +844,9 @@ def use_ability(pos: tuple[int,int], ability: str, offset: tuple[int,int]):
         else:
             click(second_ability[0]+offset[0], second_ability[1]+offset[1], delay=0.2)
             time.sleep(0.8)
-            select_unit(pos, offset)
+            selected = select_unit(pos, offset)
+            if not selected:
+                return False
             if dio_ability.upper() == "TIMESTOP":
                 click(378+offset[0], 283+offset[1], delay=0.1)
         click(307+offset[0], 230+offset[1], delay=0.2)
@@ -1003,21 +1019,24 @@ def lobby_path(area: str, stage: int, act: int):
     stage: what stage lol
     act: which act
     '''
+    print(f"pathing to lobby: {area, stage, act}")
     start_match = [(447, 476),(405, 363)]
     create_match = (82, 288)
     find_title = next(filter(lambda p: "Roblox" in p, gw.getAllTitles()))
     rb_window = gw.getWindowsWithTitle(find_title)[0]
     offset = (rb_window.left, rb_window.top)
-    
-    while not does_exist("AreaIcon.png",confidence=0.9,grayscale=True,region=(rb_window.left,rb_window.top,rb_window.left+rb_window.width,rb_window.top+rb_window.height)): # just wait for lobby
+    print(f"Window pos: {offset}")
+    while not does_exist("AreaIcon.png",confidence=0.7,grayscale=True,region=(rb_window.left,rb_window.top,rb_window.left+rb_window.width,rb_window.top+rb_window.height)): # just wait for lobby
         if pyautogui.pixelMatchesColor(654+offset[0],187+offset[1],(255,255,255),tolerance=5): #incase pop up close
             click(654+offset[0],187+offset[1],delay=0.1)
+        print("Finding area icon")
         time.sleep(1)
+    print("Found area icon")
     time.sleep(1) # Delay for loaded in
     if pyautogui.pixelMatchesColor(654+offset[0],187+offset[1],(255,255,255),tolerance=5): #incase pop up close
         click(654+offset[0],187+offset[1],delay=0.1)
-    click_image("AreaIcon.png",confidence=0.9,grayscale=True,region=(rb_window.left,rb_window.top,rb_window.left+rb_window.width,rb_window.top+rb_window.height),offset=(0,0))
-    
+    click_image("AreaIcon.png",confidence=0.7,grayscale=True,region=(rb_window.left,rb_window.top,rb_window.left+rb_window.width,rb_window.top+rb_window.height),offset=(0,0))
+    print("Pressed area icon")
     areas = {
         "Towers": (89,400),
         "Story": (714, 408),
