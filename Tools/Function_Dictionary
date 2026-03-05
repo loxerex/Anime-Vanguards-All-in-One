@@ -1365,8 +1365,7 @@ def lobby_path(area: str, stage: int, act: int):
             time.sleep(1)
             pydirectinput.press("q")
             time.sleep(2)
-     
-lobby_path("Worldlines",0,0)       
+         
 function_registry = {
     "press": {
         "type": [str, float],
