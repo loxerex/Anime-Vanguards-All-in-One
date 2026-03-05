@@ -131,7 +131,11 @@ class MainWindow():
         self.map = ""
         self.export_showing = False
         self.process = None
-        
+        def closer():
+            if self.process is not None:
+                self.process.terminate()
+            os._exit(0)
+        self.app.protocol("WM_DELETE_WINDOW", lambda: closer())
         # main views, macro view is the main view, key dict is for info
         # help is the assistant thing you can do
         # settings is api key n etc
@@ -974,7 +978,6 @@ class MainWindow():
             self.process = process
 Window = MainWindow()
 Window.start_app()
-
 
 
 
