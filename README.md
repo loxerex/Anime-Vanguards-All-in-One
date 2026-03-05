@@ -1,4 +1,3 @@
----
 
 # **Anime‑Vanguards All‑in‑One (AIO) Macro**
 
