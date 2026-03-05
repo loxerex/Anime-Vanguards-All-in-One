@@ -978,8 +978,10 @@ def main():
                         qrts()
                         time.sleep(3)
                 time.sleep(1)
-                fd.click(328+offset[0], 341+offset[1],right_click=True)
-                time.sleep(4)
+                pydirectinput.keyDown('a')
+                time.sleep(0.4)
+                pydirectinput.keyUp('a')
+                time.sleep(3)
                 pydirectinput.press("v")
                 Thread(target=spam_e).start()
                 time.sleep(2)
@@ -1013,6 +1015,7 @@ keyboard.press_and_release("a")
 keyboard.press_and_release("s")
 keyboard.press_and_release("d")
 main()
+
 
 
 
