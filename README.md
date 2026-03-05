@@ -12,8 +12,29 @@ This repo **does NOT** include:
 
 The launcher is literally a 3‑line batch script that runs the Python files using the Python interpreter inside the Python dist.
 
-# **Config Creator**
 ---
+
+## **Config Creator**
+The Config Creator lets you build configs visually instead of editing JSON manually.
+
+### What you can do:
+- Add placements, upgrades, abilities, delays, and logic  
+- Set map + auto‑position  
+- Use the AI assistant in the **Help** tab to explain fields or fix errors  
+- you MUST provide your own api key.
+
+### Required step:
+**You must export a config before running it.**  
+The macro runs the last exported config in CurrentConfig.json, so make sure to export before running it
+
+### Basic workflow:
+1. Open the AIO tool  
+2. Go to **Config Creator**  
+3. Add your orders  
+4. Set map + auto‑position  
+5. Export the config (**F8**)  
+6. Run it (**F3**)  
+
 
 ## **Default Hotkeys (VK → Actual Key)**  
 These are the default shortcuts the macro listens for.  
@@ -45,29 +66,4 @@ To record mouse positions for placements, you must:
 
 If you don’t click the button first, the hotkeys won’t do anything.
 
----
 
-## **Config Creator**
-The Config Creator lets you build configs visually instead of editing JSON manually.
-
-### What you can do:
-- Add placements, upgrades, abilities, delays, and logic  
-- Set map + auto‑position  
-- Use the AI assistant in the **Help** tab to explain fields or fix errors  
-- you MUST provide your own api key.
-
-### Required step:
-**You must export a config before running it.**  
-The macro runs the last exported config in CurrentConfig.json, so make sure to export before running it
-
-### Basic workflow:
-1. Open the AIO tool  
-2. Go to **Config Creator**  
-3. Add your orders  
-4. Set map + auto‑position  
-5. Export the config (**F8**)  
-6. Run it (**F3**)  
-
----
-
-If you want, I can also generate a polished full README with badges, screenshots, and a feature list.
