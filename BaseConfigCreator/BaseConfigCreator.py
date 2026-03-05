@@ -691,7 +691,10 @@ class MainWindow():
             
             def on_export():
                 self.export(Auto_Pos.get("0.0","end-1c"),Caloric_Unit.get("0.0","end-1c"))
-                Exported_Config.insert("0.0",f"{load_json(os.path.join(os.path.dirname(os.path.abspath(__file__)), "CurrentConfig.json"))}")
+                text = ""
+                with open(os.path.join(os.path.dirname(os.path.abspath(__file__)),"CurrentConfig.json"),"r") as f:
+                    text = f.read()
+                Exported_Config.insert("0.0",text)
             Export =CTkButton(setting_container,text="Export Config",font=CTkFont(size=25),command=on_export,text_color="#EEEEEE",width=180,height=52,fg_color="#8E1616",hover_color="#841414")
             Export.place(x=455,y=13)
 
