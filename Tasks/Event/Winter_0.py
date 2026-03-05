@@ -17,7 +17,7 @@ offset = (rb_window.left, rb_window.top)
 
 WE_Json = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))), "Settings", "Event", "Winter.json")
 
-# hello from github
+# testing commit
 
 class testclass: 
     pass
@@ -1013,5 +1013,6 @@ keyboard.press_and_release("a")
 keyboard.press_and_release("s")
 keyboard.press_and_release("d")
 main()
+
 
 
