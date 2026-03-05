@@ -1,0 +1,15 @@
+{
+    "API_KEY": "",
+    "load_previous_config": 36,
+    "pos_rb": 112,
+    "run_config": 114,
+    "stop_macro": 115,
+    "auto_position": 116,
+    "kill_macro": 117,
+    "set_map": 118,
+    "export_config": 119,
+    "import_config": 120,
+    "add_order": 45,
+    "log_mouse_position": 190,
+    "stop_logging_mouse_position": 78
+}

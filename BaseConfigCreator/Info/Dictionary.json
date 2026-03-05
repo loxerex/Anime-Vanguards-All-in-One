@@ -1,0 +1,64 @@
+{
+  "Order": {
+    "place": "Places a unit by specifying [slot_number, placement_index] where placement_index is 0-based.",
+    "place_<mode>_<priority>": "Places a unit with mode ('a' = auto-upgrade, anything else = normal) and a priority value from 1-5.",
+    "setp_X": "Sets a unit's priority by pressing R X times on the selected unit.",
+    "upgrade": "Upgrades a unit using [slot_number, upgrade_index] where upgrade_index is 0-based.",
+    "sell": "Sells a unit using [slot_number, placement_index] to identify which placed unit to remove.",
+    "ability": "Uses a unit ability via [slot_number, ability_index] where ability_index is 0-based.",
+    "wfs": "Waits for the spawn button using [0, mode] where mode=0 waits for appear and mode=1 waits until it disappears.",
+    "start": "Starts the match using [0,0].",
+    "wfw": "Waits until a specific wave using [0, wave_number].",
+    "rts": "Returns to spawn using [0,0].",
+    "restart": "Restarts the match using [0,0].",
+    "wait": "Waits a number of seconds using [0, seconds].",
+    "cid_number": "Runs the full Cid Raid number-reading and tower activation routine using [0,0]."
+  },
+
+  "Unit Abilities": {
+    "BASE": "Activates the first ability button.",
+    "BASE_AUTO": "Toggles auto-cast on the first ability button.",
+    "SECOND": "Activates the second ability button.",
+    "THIRD": "Activates the third ability button.",
+
+    "MAGE_1": "Selects mage submenu option 1.",
+    "MAGE_2": "Selects mage submenu option 2.",
+    "MAGE_3": "Selects mage submenu option 3.",
+
+    "VSJW_NUKE_1": "Triggers Sung Jin-Woo nuke #1.",
+    "VSJW_NUKE_2": "Triggers Sung Jin-Woo nuke #2.",
+    "VSJW_NUKE_3": "Triggers Sung Jin-Woo nuke #3.",
+
+    "VSJW_SHADOW_A<1-0>_<B/S/H/E><1-4>": "Summons a VSJW shadow, If A1 arise will be on, using priority type (B=Bear, S=Steel, H=Healer, E=Beru) and a number from 1-4.",
+
+    "PRIDEBURN_<slot>": "Toggles Escanor's Prideburn for the specified slot number.",
+    "VALENTINE_x1,y1_x2,y2": "Shift-clicks multiple coordinates (any amount) then presses Q.",
+
+    "LAW_ONE": "Activates Law ability #1.",
+    "LAW_TWO": "Activates Law ability #2.",
+    "LAW_THREE": "Activates Law ability #3.",
+
+    "BROOK": "Runs Brook's buff loop until the buff successfully procs.",
+    "UMA_RACING": "Runs the full UMA routine including mood check, rest cycle, and upgrades.",
+
+    "AINZ_NUKE": "Activates Ainz's nuke ability.",
+    "AINZ_SPELLS_<elements>": "Opens Ainz's spell menu and selects the specified element levels.",
+    "AINZ_WORLDITEM_SCROLL_<target>_<x>_<y>": "Uses Ainz's Scroll world item on a target at coordinates [x,y].",
+    "AINZ_WORLDITEM_SAVIOR": "Uses Ainz's Savior world item.",
+    "AINZ_WORLDITEM_BRANCH": "Uses Ainz's Branch world item.",
+    "AINZ_WORLDITEM_ELEMENTS": "Uses Ainz's Elements world item.",
+    "AINZ_WORLDITEM_OUROBOUROS_<val>_<stat>": "Uses Ainz's Ouroboros world item with a value and a stat type (HP/Wave/Cost).",
+    "AINZ_WORLDITEM_CALORIC_<target>_<x>_<y>": "Uses Ainz's Caloric Stone on a target and places it at coordinates [x,y]."
+  },
+
+  "Other": {
+    "click": "Performs a mouse click using [[x,y], button] where button=0 is left click and button=1 is right click.",
+    "press": "Presses a keyboard key using [key_name,how_long]."
+  },
+
+  "Units": {
+    "placements": "Unit placements are defined as [x, y] world-space coordinates.",
+    "upgrades": "Unit upgrades use [placement_index, value] where value is a number, 'auto', or 'max'.",
+    "abilities": "Unit abilities use [placement_index, ability_name, wave_number_or_null] where wave_number_or_null determines when it triggers."
+  }
+}

@@ -1,0 +1,343 @@
+import time
+import keyboard
+import json
+import pydirectinput
+import pyautogui
+import os
+import sys
+sys.path.insert(0,os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from Tools import winTools as wt
+from Tools import Function_Dictionary as fd
+
+rb_window = wt.get_window("Roblox")
+offset = (rb_window.left, rb_window.top)
+def test_upd(data, path):
+    json_path = path
+    with open(json_path, 'w') as file:
+        json.dump(data, file, indent=4)
+def load_json(json_path):
+    with open(json_path, "r") as file:
+        return json.load(file)
+print(offset)
+Settings = load_json(os.path.join(os.path.dirname(os.path.abspath(__file__)), "CurrentConfig.json"))
+Units = Settings["Units"]
+Order = Settings["Order"]
+Do_AutoPos = Settings["Auto_Pos"]
+print(Units, Order, Do_AutoPos)
+
+
+def order_interpator(key, unit, action_index, other: bool | None = None):
+    if "setp" in key:
+        selected = Units.get(str(unit))
+        action = selected.get("placements")[action_index]
+        fd.select_unit(action, offset=offset)
+        amount = key.split("_")[1]
+        for i in range(int(amount)):
+            keyboard.press_and_release('r')
+        fd.click(305 + offset[0], 232 + offset[1])
+
+    if "place" in key:
+        print(key)
+        selected = Units.get(str(unit))
+        action = selected.get("placements")[action_index]
+        if len(key.split("_")) > 1:
+            fd.place_unit(unit, action, upg=key.split("_")[1], priority=int(key.split("_")[2]), offset=offset)
+        else:
+            fd.place_unit(unit, action, offset=offset)
+
+    match key:
+        case "upgrade":
+            selected = Units.get(str(unit))
+            print(selected.get("upgrades")[action_index])
+            index, upgrade = selected.get("upgrades")[action_index]
+            position = selected.get("placements")[index]
+            fd.upgrade_unit(upgrade, position, offset=offset)
+
+        case "sell":
+            selected = Units.get(str(unit))
+            position = selected.get("placements")[action_index]
+            fd.sell_unit(unit, offset=offset)
+
+        case "ability":
+            selected = Units.get(str(unit))
+            print(selected.get("abilities")[action_index])
+            index, ability, wave = selected.get("abilities")[action_index]
+
+            if "AINZ_WORLDITEM_CALORIC" in ability.upper():
+                ainz_caloric_unit = Settings["Caloric_Unit"]
+                ainz_caloric_unit_position = Units.get("7").get("placements")[0]
+                ability += f"_{ainz_caloric_unit}_{ainz_caloric_unit_position[0]}_{ainz_caloric_unit_position[1]}"
+
+            position = selected.get("placements")[index]
+            print(ability)
+
+            if wave is not None:
+                while wave > fd.get_wave(offset=offset):
+                    if fd.does_exist("Victory.png", confidence=0.9, grayscale=True,
+                                     region=(147 + offset[0], 150 + offset[1], 226 + offset[0], 175 + offset[1])) \
+                       or fd.does_exist("Failed.png", confidence=0.9, grayscale=True,
+                                        region=(147 + offset[0], 150 + offset[1], 226 + offset[0], 175 + offset[1])):
+                        break
+                    time.sleep(1)
+
+            fd.use_ability(position, ability, offset=offset)
+
+        case "click":
+            func = fd.click
+            if action_index == 0:
+                func(unit[0] + offset[0], unit[1] + offset[1])
+            elif action_index == 1:
+                func(unit[0] + offset[0], unit[1] + offset[1], right_click=True)
+
+        case "wfs":
+            func = fd.wait_for_spawn
+            func(offset, action_index)
+
+        case "start":
+            func = fd.start
+            func(offset)
+
+        case "wfw":
+            func = fd.wait_for_wave
+            func(action_index, offset)
+
+        case "rts":
+            func = fd.return_to_spawn
+            func(offset)
+
+        case "press":
+            func = fd.press
+            func(unit, action_index)
+
+        case "restart":
+            func = fd.restart_match
+            func(offset)
+
+        case "wait":
+            func = fd.wait
+            func(action_index)
+
+        case "cid_number":
+            cid_numb = []
+            n = 3
+
+            while n > 0:
+                while not pyautogui.pixelMatchesColor(
+                    411 + offset[0], 418 + offset[1],
+                    expectedRGBColor=(255, 10, 17), tolerance=15
+                ):
+                    if fd.does_exist("Victory.png", confidence=0.9, grayscale=True,
+                                     region=(147 + offset[0], 150 + offset[1], 226 + offset[0], 175 + offset[1])) \
+                       or fd.does_exist("Failed.png", confidence=0.9, grayscale=True,
+                                        region=(147 + offset[0], 150 + offset[1], 226 + offset[0], 175 + offset[1])):
+                        return
+                    time.sleep(0.1)
+
+                print("found num")
+                time.sleep(0.5)
+                got_num = False
+
+                while not got_num:
+                    cur_num = -1
+                    for i in range(1, 5):
+                        if fd.does_exist(
+                            f"Cid_Raid\\{i}.png", confidence=0.96, grayscale=True,
+                            region=(280 + offset[0], 438 + offset[1], 298 + offset[0], 449 + offset[1])
+                        ):
+                            print(i)
+                            cur_num = i
+
+                    if cur_num != -1:
+                        cid_numb.append(cur_num)
+                        print(cur_num)
+                        got_num = True
+
+                    time.sleep(0.2)
+                    n -= 1
+
+                if n != 0:
+                    while pyautogui.pixelMatchesColor(
+                        411 + offset[0], 418 + offset[1],
+                        expectedRGBColor=(255, 10, 17), tolerance=15
+                    ):
+                        time.sleep(0.1)
+
+            numb = [1, 2, 3, 4]
+            cid_numb = list(dict.fromkeys(cid_numb + numb))
+
+            pydirectinput.press('v')
+            time.sleep(1.5)
+
+            towers = False
+
+            for ind, area in enumerate(cid_numb):
+                if fd.does_exist("Victory.png", confidence=0.9, grayscale=True,
+                                 region=(147 + offset[0], 150 + offset[1], 226 + offset[0], 175 + offset[1])) \
+                   or fd.does_exist("Failed.png", confidence=0.9, grayscale=True,
+                                    region=(147 + offset[0], 150 + offset[1], 226 + offset[0], 175 + offset[1])):
+                    pydirectinput.press('v')
+                    return
+
+                # Tower movement blocks preserved exactly
+                if area == 1:
+                    pydirectinput.keyDown('d'); time.sleep(1.3); pydirectinput.keyUp('d')
+                    pydirectinput.keyDown('s'); time.sleep(1.4); pydirectinput.keyUp('s')
+                    while not fd.does_exist("Cid_Raid\\Activate.png", confidence=0.7, grayscale=True) and not towers:
+                        time.sleep(0.5)
+                    towers = True
+                    pydirectinput.press('e')
+                    if ind == 3: break
+                    pydirectinput.keyDown('w'); time.sleep(1.4); pydirectinput.keyUp('w')
+                    pydirectinput.keyDown('a'); time.sleep(1.3); pydirectinput.keyUp('a')
+
+                if area == 2:
+                    pydirectinput.keyDown('a'); time.sleep(1.1); pydirectinput.keyUp('a')
+                    pydirectinput.keyDown('s'); time.sleep(1.5); pydirectinput.keyUp('s')
+                    while not fd.does_exist("Cid_Raid\\Activate.png", confidence=0.7, grayscale=True) and not towers:
+                        time.sleep(0.5)
+                    towers = True
+                    pydirectinput.press('e')
+                    if ind == 3: break
+                    pydirectinput.keyDown('w'); time.sleep(1.5); pydirectinput.keyUp('w')
+                    pydirectinput.keyDown('d'); time.sleep(1.1); pydirectinput.keyUp('d')
+
+                if area == 3:
+                    pydirectinput.keyDown('a'); time.sleep(1.3); pydirectinput.keyUp('a')
+                    pydirectinput.keyDown('w'); time.sleep(1.4); pydirectinput.keyUp('w')
+                    while not fd.does_exist("Cid_Raid\\Activate.png", confidence=0.7, grayscale=True) and not towers:
+                        time.sleep(0.5)
+                    towers = True
+                    pydirectinput.press('e')
+                    if ind == 3: break
+                    pydirectinput.keyDown('s'); time.sleep(1.4); pydirectinput.keyUp('s')
+                    pydirectinput.keyDown('d'); time.sleep(1.3); pydirectinput.keyUp('d')
+
+                if area == 4:
+                    pydirectinput.keyDown('d'); time.sleep(1.15); pydirectinput.keyUp('d')
+                    pydirectinput.keyDown('w'); time.sleep(1.5); pydirectinput.keyUp('w')
+                    while not fd.does_exist("Cid_Raid\\Activate.png", confidence=0.7, grayscale=True) and not towers:
+                        time.sleep(0.5)
+                    towers = True
+                    pydirectinput.press('e')
+                    if ind == 3: break
+                    pydirectinput.keyDown('s'); time.sleep(1.5); pydirectinput.keyUp('s')
+                    pydirectinput.keyDown('a'); time.sleep(1.15); pydirectinput.keyUp('a')
+
+            pydirectinput.press('v')
+            time.sleep(0.6)
+
+            if other:
+                print("waiting for end")
+                while not any([
+                    [fd.does_exist("Victory.png", confidence=0.9, grayscale=True,
+                                   region=(147 + offset[0], 150 + offset[1], 226 + offset[0], 175 + offset[1]))],
+                    [fd.does_exist("Failed.png", confidence=0.9, grayscale=True,
+                                   region=(147 + offset[0], 150 + offset[1], 226 + offset[0], 175 + offset[1]))]
+                ]):
+                    time.sleep(1)
+                print("Found end")
+                time.sleep(3)
+                fd.click(726 + offset[0], 168 + offset[1])
+                time.sleep(1)
+
+            quick_rts = [(28, 605), (699, 320), (758, 147)]
+            for c in quick_rts:
+                fd.click(c[0] + offset[0], c[1] + offset[1], delay=0.1)
+                time.sleep(0.2)
+
+            pydirectinput.press('f')
+
+            inputs = [(619, 193), (156, 247), (333, 537), (405, 609), (305, 232)]
+            for c in inputs:
+                fd.click(c[0] + offset[0], c[1] + offset[1], delay=0.1)
+                if c == (333, 537):
+                    time.sleep(1)
+                else:
+                    time.sleep(0.2)
+
+            pydirectinput.press('f')
+            pydirectinput.keyDown('o'); time.sleep(0.8); pydirectinput.keyUp('o')
+            fd.click(417 + offset[0], 520 + offset[1], right_click=True)
+
+            if other:
+                time.sleep(1)
+                fd.click(408 + offset[0], 144 + offset[1])
+def load_aio_settings():
+    json_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "Settings", "AIO_Settings.json")
+    with open(json_path, 'r') as file:
+        return json.load(file)   
+
+def main():
+    while not load_json(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),"Info", "state.json"))["running"]:
+        time.sleep(0.5)
+
+    First_Match = True
+    AINZ_SPELL = False
+
+    fd.wait_for_spawn(offset, 0)
+    while True:
+        match_end = False
+        if fd.check_for_cards(offset):
+            fd.challenge_cards(load_aio_settings()["Settings"]["Challenge_Card"],offset)
+        for func in Order:
+            print(func)
+
+            if fd.does_exist("Victory.png", confidence=0.9, grayscale=True,
+                             region=(147 + offset[0], 150 + offset[1], 226 + offset[0], 175 + offset[1])):
+                match_end = True
+                break
+
+            if fd.does_exist("Failed.png", confidence=0.9, grayscale=True,
+                             region=(147 + offset[0], 150 + offset[1], 226 + offset[0], 175 + offset[1])):
+                match_end = True
+                break
+
+            while not load_json(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),"Info", "state.json"))["running"]:
+                time.sleep(0.5)
+
+            if func[0] == "ability" and "AINZ_SPELLS" in Units.get(str(func[1])).get("abilities")[func[2]][1]:
+                if not AINZ_SPELL:
+                    order_interpator(func[0], func[1], func[2])
+                    AINZ_SPELL = True
+            else:
+                if "end" not in func[0]:
+                    if "FT_" in func[0]:
+                        arg = func[0].replace("FT_", "")
+                        if First_Match:
+                            order_interpator(arg, func[1], func[2])
+                    else:
+                        order_interpator(func[0], func[1], func[2])
+                else:
+                    match_end = True
+                    break
+
+        while not match_end:
+            if "--worldlines" in sys.argv:
+                if fd.does_exist("Challenge\\ModifierShow.png", confidence=0.9, grayscale=True,
+                                 region=(147 + offset[0], 150 + offset[1], 226 + offset[0], 175 + offset[1])):
+                    fd.click(409 + offset[0], 309 + offset[1])
+
+            if fd.does_exist("Victory.png", confidence=0.9, grayscale=True,
+                             region=(147 + offset[0], 150 + offset[1], 226 + offset[0], 175 + offset[1])):
+                match_end = True
+                break
+
+            if fd.does_exist("Failed.png", confidence=0.9, grayscale=True,
+                             region=(147 + offset[0], 150 + offset[1], 226 + offset[0], 175 + offset[1])):
+                match_end = True
+                break
+
+            time.sleep(2)
+
+        retry_button = (363, 471)
+        time.sleep(2)
+
+        while fd.does_exist("Victory.png", confidence=0.9, grayscale=True,
+                             region=(147 + offset[0], 150 + offset[1], 226 + offset[0], 175 + offset[1])) \
+           or fd.does_exist("Failed.png", confidence=0.9, grayscale=True,
+                            region=(147 + offset[0], 150 + offset[1], 226 + offset[0], 175 + offset[1])):
+            fd.click(retry_button[0] + offset[0], retry_button[1] + offset[1])
+            time.sleep(1)
+
+        First_Match = False
+main()
