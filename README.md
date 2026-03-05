@@ -57,7 +57,7 @@ Each number is a **Virtual‑Key (VK) code**, translated below into the real key
 
 ---
 
-## **Mouse Position Logging **  
+## **Mouse Position Logging**  
 To record mouse positions for placements, you must:
 
 1. Click **“Log Mouse Positions”** in the UI  
