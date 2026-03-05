@@ -1006,17 +1006,17 @@ def lobby_path(area: str, stage: int, act: int):
     start_match = [(447, 476),(405, 363)]
     create_match = (82, 288)
     find_title = next(filter(lambda p: "Roblox" in p, gw.getAllTitles()))
-    window = gw.getWindowsWithTitle(find_title)[0]
-    offset = (window.left, window.top)
+    rb_window = gw.getWindowsWithTitle(find_title)[0]
+    offset = (rb_window.left, rb_window.top)
     
-    while not does_exist("AreaIcon.png",confidence=0.9,grayscale=True): # just wait for lobby
+    while not does_exist("AreaIcon.png",confidence=0.9,grayscale=True,region=(rb_window.left,rb_window.top,rb_window.left+rb_window.width,rb_window.top+rb_window.height)): # just wait for lobby
         if pyautogui.pixelMatchesColor(654+offset[0],187+offset[1],(255,255,255),tolerance=5): #incase pop up close
             click(654+offset[0],187+offset[1],delay=0.1)
         time.sleep(1)
     time.sleep(1) # Delay for loaded in
     if pyautogui.pixelMatchesColor(654+offset[0],187+offset[1],(255,255,255),tolerance=5): #incase pop up close
         click(654+offset[0],187+offset[1],delay=0.1)
-    click_image("AreaIcon.png",confidence=0.9,grayscale=True,region=(10+offset[0], 125+offset[1], 207+offset[0], 499+offset[1]),offset=(0,0))
+    click_image("AreaIcon.png",confidence=0.9,grayscale=True,region=(rb_window.left,rb_window.top,rb_window.left+rb_window.width,rb_window.top+rb_window.height),offset=(0,0))
     
     areas = {
         "Towers": (89,400),
