@@ -140,7 +140,7 @@ class MainWindow():
         self.tabs.add('Help') 
         self.tabs.add('Settings') 
         
-        self.tabs.set('Settings')
+        self.tabs.set('Macro View')
         
         #Settings
         settings = load_settings()
@@ -974,6 +974,7 @@ class MainWindow():
             self.process = process
 Window = MainWindow()
 Window.start_app()
+
 
 
 
