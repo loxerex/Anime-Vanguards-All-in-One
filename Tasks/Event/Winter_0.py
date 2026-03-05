@@ -610,6 +610,9 @@ def main():
         if fd.does_exist('Alert.png',confidence=0.8,grayscale=True,region=(rb_window.left,rb_window.top,rb_window.left+rb_window.width,rb_window.height+rb_window.top)):
             fd.click(406+offset[0], 358+offset[1],delay=0.2) # ERZAfd.click
             time.sleep(0.6)
+        if fd.does_exist('RestartCon.png',confidence=0.8,grayscale=True,region=(rb_window.left,rb_window.top,rb_window.left+rb_window.width,rb_window.height+rb_window.top)):
+            fd.click(467+offset[0], 365+offset[1],delay=0.2) # ERZAfd.click
+            time.sleep(0.6)
         while fd.does_exist("Failed.png",confidence=0.9,grayscale=True,region=(147+offset[0], 150+offset[1], 226+offset[0], 175+offset[1])):
             fd.click(375+offset[0], 469+offset[1])
             time.sleep(1)
@@ -1015,6 +1018,7 @@ keyboard.press_and_release("a")
 keyboard.press_and_release("s")
 keyboard.press_and_release("d")
 main()
+
 
 
 
