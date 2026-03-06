@@ -136,6 +136,10 @@ def disconnect_checker(process, process_location, path: tuple[str,int,int] | Non
                 time_out-=1
                 time.sleep(1)
             time.sleep(15)
+            offset = (rb_window.left,rb_window.top)
+            if fd.does_exist("Leaderboard_Check.png",confidence=0.8,grayscale=True,region=(633+offset[0], 99+offset[1], 669+offset[0], 123+offset[1])):
+                pydirectinput.press("tab")
+            time.sleep(1)
             fd.click(654+rb_window.left, 188+rb_window.top)
             if path is not None:
                 fd.lobby_path(path[0],path[1],path[2])
@@ -872,12 +876,20 @@ def run_task(pyfile):
                     act = 0
         print(area,stage,act)
     pathed_lobby = False
+    offset = (rb_window.left,rb_window.top)
+    if fd.does_exist("Leaderboard_Check.png",confidence=0.8,grayscale=True,region=(633+offset[0], 99+offset[1], 669+offset[0], 123+offset[1])):
+        pydirectinput.press("tab")
     if fd.does_exist("IsInGame.png",confidence=0.8,grayscale=True,region=(rb_window.left,rb_window.top,rb_window.left+rb_window.width,rb_window.top+rb_window.height)):
+        print("In lobby, pathing.")
         fd.lobby_path(area=area,stage=stage,act=int(act))
         pathed_lobby = True
         print(area, stage, act)
+    else:
+        print("In game, no lobby path")
     if load_aio_settings()["Click_Chat"]:
+        print("Closing chat...")
         fd.wait_for_spawn((rb_window.left,rb_window.top),0)
+        
         if not load_aio_settings()["VC_CHAT"]:
             fd.click(145+rb_window.left, 64+rb_window.top,delay=0.4)
             if pathed_lobby:
@@ -887,6 +899,10 @@ def run_task(pyfile):
             if pathed_lobby:
                 fd.click(202+rb_window.left, 64+rb_window.top,delay=0.4)
         process = subprocess.Popen([sys.executable, "-u", pyfile],stdout=subprocess.PIPE,stderr=subprocess.STDOUT,text=True,bufsize=1)
+    else:
+        fd.wait_for_spawn((rb_window.left,rb_window.top),0)
+        if fd.does_exist("Leaderboard_Check.png",confidence=0.8,grayscale=True,region=(633+offset[0], 99+offset[1], 669+offset[0], 123+offset[1])):
+            pydirectinput.press("tab")
     pids = load_pid()
     print(pids)
     pids["pid"]+=[process.pid]
