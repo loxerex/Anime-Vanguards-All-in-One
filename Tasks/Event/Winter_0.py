@@ -396,11 +396,13 @@ def secure_select(pos: tuple[int,int]):
     while not pyautogui.pixel(305+offset[0], 233+offset[1]) == (255,255,255):
         while not load_state()["running"]:
             time.sleep(0.5)
+        if fd.does_exist("Unit_Open.png", confidence=0.8, grayscale=True, region=(100+offset[0],400+offset[1], 153, 416)):
+            break
         if fd.does_exist('Alert.png',confidence=0.8,grayscale=True,region=(rb_window.left,rb_window.top,rb_window.left+rb_window.width,rb_window.height+rb_window.top)):
             fd.click(406+offset[0], 358+offset[1],delay=0.2) # ERZAfd.click
             time.sleep(0.6)
         fd.click(pos[0],pos[1],delay=0.2)
-        time.sleep(0.8)
+        time.sleep(1.2)
         if time_out<0:
             print("timeout failure")
             break
@@ -1018,6 +1020,7 @@ keyboard.press_and_release("a")
 keyboard.press_and_release("s")
 keyboard.press_and_release("d")
 main()
+
 
 
 
