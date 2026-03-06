@@ -84,6 +84,8 @@ def wait_for_spawn(offset: tuple[int,int]):
 def main():
     print("Starting odyssey")
     while True:
+        if fd.does_exist("Leaderboard_Check.png",confidence=0.8,grayscale=True,region=(633+offset[0], 99+offset[1], 669+offset[0], 123+offset[1])):
+            pydirectinput.press("tab")
         oddysey_path()
         auto_play_pressed = False
         wait_for_spawn(offset)
@@ -94,6 +96,8 @@ def main():
             else:
                 fd.click(202+rb_window.left, 64+rb_window.top,delay=0.4)
                 fd.click(202+rb_window.left, 64+rb_window.top,delay=0.4)
+        if fd.does_exist("Leaderboard_Check.png",confidence=0.8,grayscale=True,region=(633+offset[0], 99+offset[1], 669+offset[0], 123+offset[1])):
+            pydirectinput.press("tab")
         for match in range(4):
             print(f"Starting match {match+1}")
             while not load_state()["running"]:
