@@ -707,7 +707,7 @@ def main():
 
         #Path to nami
         fd.click(142+offset[0], 137+offset[1],right_click=True)
-        time.sleep(3)
+        time.sleep(5)
         while not fd.does_exist("Winter\\Nami.png",confidence=0.8,grayscale=False, region=hotbar_region):
             while not load_state()["running"]:
                 time.sleep(0.5)
@@ -1020,6 +1020,7 @@ keyboard.press_and_release("a")
 keyboard.press_and_release("s")
 keyboard.press_and_release("d")
 main()
+
 
 
 
