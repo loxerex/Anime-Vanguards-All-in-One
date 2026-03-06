@@ -1071,16 +1071,14 @@ def lobby_path(area: str, stage: int, act: int):
     
     mouse = Controller()
     match area:
-        case "Winter":
+        case "Winter": # credit to void
             click_image("AreaIcon.png",confidence=0.9,grayscale=True,region=(10+offset[0], 125+offset[1], 207+offset[0], 499+offset[1]),offset=(0,0))
             time.sleep(2)
             click(587+offset[0],513+offset[1])
             time.sleep(2)
-            pydirectinput.keyDown("w")
-            pydirectinput.keyDown("a")
-            time.sleep(1.9)
-            pydirectinput.keyUp("a")
-            pydirectinput.keyUp("w")
+            pydirectinput.keyDown("s")
+            time.sleep(5.8)
+            pydirectinput.keyUp("s")
             pydirectinput.press('e')
             winter_start =  [(181, 469), (350, 328), (405, 363), (80, 454)]
             for pos_c in winter_start:
