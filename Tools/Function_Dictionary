@@ -1071,7 +1071,7 @@ def lobby_path(area: str, stage: int, act: int):
     
     mouse = Controller()
     match area:
-        case "Winter":
+        case "Winter": # hi
             click_image("AreaIcon.png",confidence=0.9,grayscale=True,region=(10+offset[0], 125+offset[1], 207+offset[0], 499+offset[1]),offset=(0,0))
             time.sleep(2)
             click(591+offset[0],522+offset[1])# [(591, 522)]
