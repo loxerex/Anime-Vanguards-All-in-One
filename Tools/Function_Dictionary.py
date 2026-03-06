@@ -289,6 +289,8 @@ def select_unit(unit: tuple[int,int], offset: tuple[int,int]):
     while not pyautogui.pixel(305+offset[0], 233+offset[1]) == (255,255,255) and not does_exist("Unit_Open.png", confidence=0.8, grayscale=True, region=(100+offset[0],400+offset[1], 153, 416)):
         if does_exist("Victory.png",confidence=0.9,grayscale=True,region=(147+offset[0], 150+offset[1], 226+offset[0], 175+offset[1])) or does_exist("Failed.png",confidence=0.9,grayscale=True,region=(147+offset[0], 150+offset[1], 226+offset[0], 175+offset[1])):
             break
+        if does_exist("Unit_Open.png", confidence=0.8, grayscale=True, region=(100+offset[0],400+offset[1], 153, 416)):
+            break
         if load_state()["running"] == False:
             while not load_state()["running"]:
                 time.sleep(0.5)
