@@ -137,7 +137,7 @@ def disconnect_checker(process, process_location, path: tuple[str,int,int] | Non
                 time.sleep(1)
             time.sleep(15)
             offset = (rb_window.left,rb_window.top)
-            if fd.does_exist("Leaderboard_Check.png",confidence=0.8,grayscale=True,region=(633+offset[0], 99+offset[1], 669+offset[0], 123+offset[1])):
+            if any([fd.does_exist("Leaderboard_Check.png",confidence=0.8,grayscale=True,region=(543+offset[0], 87+offset[1], 797+offset[0], 191+offset[1])), fd.does_exist("LB_Check2.png",confidence=0.8,grayscale=True,region=(543+offset[0], 87+offset[1], 797+offset[0], 191+offset[1]))]):
                 pydirectinput.press("tab")
             time.sleep(1)
             fd.click(654+rb_window.left, 188+rb_window.top)
@@ -171,9 +171,11 @@ def worldlineshandler():
     img_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "Resources")
     task_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "Tasks")
     folders = ["Worldlines_Extra","Positioner"]
-    
+    if any([fd.does_exist("Leaderboard_Check.png",confidence=0.8,grayscale=True,region=(543+offset[0], 87+offset[1], 797+offset[0], 191+offset[1])), fd.does_exist("LB_Check2.png",confidence=0.8,grayscale=True,region=(543+offset[0], 87+offset[1], 797+offset[0], 191+offset[1]))]):
+            pydirectinput.press("tab")
     if fd.does_exist("IsInGame.png",confidence=0.8,grayscale=True,region=(rb_window.left,rb_window.top,rb_window.left+rb_window.width,rb_window.top+rb_window.height)):
         fd.lobby_path(area="Worldlines",stage=0,act=0)
+    
     def return_to_spawn(offset: tuple[int,int]):
         click_pos = [(30, 605), (708, 322), (755, 149)]
         for pos in click_pos:
@@ -311,6 +313,8 @@ def worldlineshandler():
             time.sleep(0.5)
         while not fd.does_exist("In_Game.png",grayscale=True,confidence=0.8,region=(643+offset[0], 306+offset[1], 806+offset[0], 375+offset[1])):
             time.sleep(1)
+        if any([fd.does_exist("Leaderboard_Check.png",confidence=0.8,grayscale=True,region=(543+offset[0], 87+offset[1], 797+offset[0], 191+offset[1])), fd.does_exist("LB_Check2.png",confidence=0.8,grayscale=True,region=(543+offset[0], 87+offset[1], 797+offset[0], 191+offset[1]))]):
+                pydirectinput.press("tab")
         time.sleep(1)
         click(409+offset[0], 309+offset[1])
         if True:
@@ -889,7 +893,8 @@ def run_task(pyfile):
     if load_aio_settings()["Click_Chat"]:
         print("Closing chat...")
         fd.wait_for_spawn((rb_window.left,rb_window.top),0)
-        
+        if any([fd.does_exist("Leaderboard_Check.png",confidence=0.8,grayscale=True,region=(543+offset[0], 87+offset[1], 797+offset[0], 191+offset[1])), fd.does_exist("LB_Check2.png",confidence=0.8,grayscale=True,region=(543+offset[0], 87+offset[1], 797+offset[0], 191+offset[1]))]):
+            pydirectinput.press("tab")
         if not load_aio_settings()["VC_CHAT"]:
             fd.click(145+rb_window.left, 64+rb_window.top,delay=0.4)
             if pathed_lobby:
@@ -901,7 +906,7 @@ def run_task(pyfile):
         process = subprocess.Popen([sys.executable, "-u", pyfile],stdout=subprocess.PIPE,stderr=subprocess.STDOUT,text=True,bufsize=1)
     else:
         fd.wait_for_spawn((rb_window.left,rb_window.top),0)
-        if fd.does_exist("Leaderboard_Check.png",confidence=0.8,grayscale=True,region=(633+offset[0], 99+offset[1], 669+offset[0], 123+offset[1])):
+        if any([fd.does_exist("Leaderboard_Check.png",confidence=0.8,grayscale=True,region=(543+offset[0], 87+offset[1], 797+offset[0], 191+offset[1])), fd.does_exist("LB_Check2.png",confidence=0.8,grayscale=True,region=(543+offset[0], 87+offset[1], 797+offset[0], 191+offset[1]))]):
             pydirectinput.press("tab")
     pids = load_pid()
     print(pids)
