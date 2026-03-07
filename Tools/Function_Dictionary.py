@@ -1048,7 +1048,7 @@ def lobby_path(area: str, stage: int, act: int):
         "Dungeons": (588,400),
         "Boss": (92,525),
         "Odyssey": (218,525),
-        "Worldlines": (466,400),
+        "Worldlines": (337, 524),
         "Winter": (342,525),
         "WorldDestroyer": (110, 249),
         "Rift": (465, 520)
