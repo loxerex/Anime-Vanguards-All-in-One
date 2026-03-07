@@ -126,6 +126,11 @@ def path_winter(area: int, sub_area: int):
     5 = monarch
     '''
     time.sleep(1.5)
+    if fd.does_exist('Alert.png',confidence=0.8,grayscale=True,region=(rb_window.left,rb_window.top,rb_window.left+rb_window.width,rb_window.height+rb_window.top)):
+        fd.click(406+offset[0], 358+offset[1],delay=0.2) # ERZAfd.click
+        time.sleep(0.2)
+        fd.click(696+offset[0],165+offset[1],delay=0.2)
+        time.sleep(0.3
     if not check_camera():
         while not check_camera():
             pydirectinput.press("v")
@@ -1020,6 +1025,7 @@ keyboard.press_and_release("a")
 keyboard.press_and_release("s")
 keyboard.press_and_release("d")
 main()
+
 
 
 
