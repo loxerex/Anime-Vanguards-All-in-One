@@ -130,7 +130,7 @@ def path_winter(area: int, sub_area: int):
         fd.click(406+offset[0], 358+offset[1],delay=0.2) # ERZAfd.click
         time.sleep(0.2)
         fd.click(696+offset[0],165+offset[1],delay=0.2)
-        time.sleep(0.3
+        time.sleep(0.3)
     if not check_camera():
         while not check_camera():
             pydirectinput.press("v")
@@ -1025,6 +1025,7 @@ keyboard.press_and_release("a")
 keyboard.press_and_release("s")
 keyboard.press_and_release("d")
 main()
+
 
 
 
