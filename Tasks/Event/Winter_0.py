@@ -81,7 +81,7 @@ monarch_region = (354+offset[0], 421+offset[1], 463+offset[0], 448+offset[1])
 
 
 def check_camera():
-    return fd.does_exist("Winter\\Camera_Angled.png",confidence=0.8,grayscale=True,region=(int(rb_window.left),int(rb_window.top),rb_window.left+rb_window.width,rb_window.top+rb_window.height))
+    return fd.does_exist("Winter\\Camera_Angled.png",confidence=0.7,grayscale=True,region=(int(rb_window.left),int(rb_window.top),rb_window.left+rb_window.width,rb_window.top+rb_window.height))
 
 def check_location():
     return any([fd.does_exist("Winter\\DetectArea.png",confidence=0.8,grayscale=True,region=noti_region),fd.does_exist("Winter\\LootboxDetection.png",confidence=0.8,grayscale=True,region=noti_region),fd.does_exist("Winter\\HasMonarch.png",confidence=0.9,grayscale=True,region=monarch_region)])
@@ -1025,6 +1025,7 @@ keyboard.press_and_release("a")
 keyboard.press_and_release("s")
 keyboard.press_and_release("d")
 main()
+
 
 
 
