@@ -143,6 +143,14 @@ def disconnect_checker(process, process_location, path: tuple[str,int,int] | Non
             fd.click(654+rb_window.left, 188+rb_window.top)
             if path is not None:
                 fd.lobby_path(path[0],path[1],path[2])
+            if load_aio_settings()["Click_Chat"]:
+                fd.wait_for_spawn((rb_window.left,rb_window.top),0)
+                if not load_aio_settings()["VC_CHAT"]:
+                    fd.click(145+rb_window.left, 64+rb_window.top,delay=0.4)
+                    fd.click(145+rb_window.left, 64+rb_window.top,delay=0.4)
+                else:
+                    fd.click(202+rb_window.left, 64+rb_window.top,delay=0.4)
+                    fd.click(202+rb_window.left, 64+rb_window.top,delay=0.4)
             p =subprocess.Popen([sys.executable, "-u", process_location]) # restart, cant capture text tho
             pids = load_pid()
             pids["pid"] = []
@@ -925,5 +933,6 @@ def run_task(pyfile):
     Thread(target=disconnect_checker, args=[process, pyfile,[area,stage,act]],daemon=True).start()
     print("Started process and disconnect checker.")
     return process
+
 
 
