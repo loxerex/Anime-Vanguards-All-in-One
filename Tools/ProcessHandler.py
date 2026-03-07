@@ -308,6 +308,7 @@ def worldlineshandler():
     Settings = load_wls()
     Mouse = Controller()
     p_team = Settings["Base_Team"]
+    First_match = True
     while True:
         while not load_state()["running"]:
             time.sleep(0.5)
@@ -315,6 +316,16 @@ def worldlineshandler():
             time.sleep(1)
         if any([fd.does_exist("Leaderboard_Check.png",confidence=0.8,grayscale=True,region=(543+offset[0], 87+offset[1], 797+offset[0], 191+offset[1])), fd.does_exist("LB_Check2.png",confidence=0.8,grayscale=True,region=(543+offset[0], 87+offset[1], 797+offset[0], 191+offset[1]))]):
                 pydirectinput.press("tab")
+        if First_match:
+            First_match = False
+            if load_aio_settings()["Click_Chat"]:
+                fd.wait_for_spawn((rb_window.left,rb_window.top),0)
+                if not load_aio_settings()["VC_CHAT"]:
+                    fd.click(145+rb_window.left, 64+rb_window.top,delay=0.4)
+                    fd.click(145+rb_window.left, 64+rb_window.top,delay=0.4)
+                else:
+                    fd.click(202+rb_window.left, 64+rb_window.top,delay=0.4)
+                    fd.click(202+rb_window.left, 64+rb_window.top,delay=0.4)
         time.sleep(1)
         click(409+offset[0], 309+offset[1])
         if True:
@@ -330,8 +341,6 @@ def worldlineshandler():
         path = get_path_of_pyfile(map)
         print(map, path)
         click(475+offset[0], 124+offset[1])
-        time.sleep(6)
-        restart_match(offset)
         if p_team != Settings["Base_Team"]:
             equip_team(int(Settings["Base_Team"]))
             print("Equiping base team")
@@ -762,6 +771,7 @@ def challenge_handler():
             time.sleep(3)
         time.sleep(1)
 
+
 def run_task(pyfile):
     global disconnect_checker_flag
     disconnect_checker_flag.set()
@@ -915,4 +925,5 @@ def run_task(pyfile):
     Thread(target=disconnect_checker, args=[process, pyfile,[area,stage,act]],daemon=True).start()
     print("Started process and disconnect checker.")
     return process
+
 
