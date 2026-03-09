@@ -492,46 +492,49 @@ def buy_monarch(): # this just presses e untill it buys monarch, use after direc
 
 def place_hotbar_units():
     # Scans and places all units in your hotbar, tracking them too
-    if not check_camera():
-        while not check_camera():
-            pydirectinput.press("v")
-            qrts()
-            time.sleep(3)
-    placing = True
-    while placing:
-        is_unit = False
-        for unit in Units_Placeable:
-            keyboard.press_and_release('e')
-            while not load_state()["running"]:
-                time.sleep(0.5)
-            if fd.does_exist(f"Winter\\{unit}.png", confidence=0.8, grayscale=False,region=hotbar_region):
-                if unit != "Doom":
-                    is_unit = True
-                    unit_pos = Settings.Unit_Positions.get(unit)
-                    index = Unit_Placements_Left.get(unit)-1
-                    if index <0:
-                        is_unit = False
-                    print(f"Placing unit {unit} {index+1} at {unit_pos}")
-                    place_unit(unit, unit_pos[index])
-                    
-                else:#(347, 390)
-                    doom = (487, 446)
-                    place_unit(unit,doom)
-                    time.sleep(2)
-                    set_boss()
-                    pydirectinput.press('z')
-                    fd.click(305+offset[0], 233+offset[1], delay=0.2)
-                    path_winter(5,0)
-                    buy_monarch()
-                    qrts()
-                    secure_select(doom)
-                if unit != "Doom":
-                    Unit_Placements_Left[unit]-=1
-                    print(f"Placed {unit} | {unit} has {Unit_Placements_Left.get(unit)} placements left.")
-                else:
-                    print("Placed doom slayer.")
-        if not is_unit:
-            placing = False
+    try:
+        if not check_camera():
+            while not check_camera():
+                pydirectinput.press("v")
+                qrts()
+                time.sleep(3)
+        placing = True
+        while placing:
+            is_unit = False
+            for unit in Units_Placeable:
+                keyboard.press_and_release('e')
+                while not load_state()["running"]:
+                    time.sleep(0.5)
+                if fd.does_exist(f"Winter\\{unit}.png", confidence=0.8, grayscale=False,region=hotbar_region):
+                    if unit != "Doom":
+                        is_unit = True
+                        unit_pos = Settings.Unit_Positions.get(unit)
+                        index = Unit_Placements_Left.get(unit)-1
+                        if index <0:
+                            is_unit = False
+                        print(f"Placing unit {unit} {index+1} at {unit_pos}")
+                        place_unit(unit, unit_pos[index])
+                        
+                    else:#(347, 390)
+                        doom = (487, 446)
+                        place_unit(unit,doom)
+                        time.sleep(2)
+                        set_boss()
+                        pydirectinput.press('z')
+                        fd.click(305+offset[0], 233+offset[1], delay=0.2)
+                        path_winter(5,0)
+                        buy_monarch()
+                        qrts()
+                        secure_select(doom)
+                    if unit != "Doom":
+                        Unit_Placements_Left[unit]-=1
+                        print(f"Placed {unit} | {unit} has {Unit_Placements_Left.get(unit)} placements left.")
+                    else:
+                        print("Placed doom slayer.")
+            if not is_unit:
+                placing = False
+    except Exception as error:
+        print(f"Error occured during placing hotbar units, Error: {error}")
             
 def ainz_setup(unit:str): 
     '''
@@ -1025,6 +1028,7 @@ keyboard.press_and_release("a")
 keyboard.press_and_release("s")
 keyboard.press_and_release("d")
 main()
+
 
 
 
