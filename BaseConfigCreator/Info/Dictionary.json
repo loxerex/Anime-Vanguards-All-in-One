@@ -1,5 +1,6 @@
 {
   "Order": {
+    "First Time Key":"Label ANY order key with FT_keyname to make it so it only happens once, very usefull for set ups.",
     "place": "Places a unit by specifying [slot_number, placement_index] where placement_index is 0-based.",
     "place_<mode>_<priority>": "Places a unit with mode ('a' = auto-upgrade, anything else = normal) and a priority value from 1-5.",
     "setp_X": "Sets a unit's priority by pressing R X times on the selected unit.",
@@ -12,6 +13,7 @@
     "rts": "Returns to spawn using [0,0].",
     "restart": "Restarts the match using [0,0].",
     "wait": "Waits a number of seconds using [0, seconds].",
+    "end": "Counts as a win/victory, usefull for things that restart the match. Just use [0,0] as arguments",
     "cid_number": "Runs the full Cid Raid number-reading and tower activation routine using [0,0]."
   },
 
