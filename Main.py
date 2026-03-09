@@ -309,23 +309,28 @@ class MainWindow():
         self.code_output = CTkTextbox(self.Code_Container, width=250, text_color="#FFFFFF", height=417,fg_color="#1D1616",font=CTkFont(family="Consolas",size=13))
         self.code_output.place(x=5,y=32)
         
-        position_rb = CTkLabel(self.tabs.tab('Player'), text=f'{settings["Position_Key"]}: Position Roblox', text_color="#EEEEEE",width=125, height=28, fg_color='#8E1616',corner_radius=5)
-        position_rb.place(x=15,y=620)
-        start_rb = CTkLabel(self.tabs.tab('Player'), text=f'{settings["Start_Key"]}: Run Task', width=100,text_color="#EEEEEE", height=28, fg_color='#8E1616',corner_radius=5)
-        start_rb.place(x=150,y=620)
-        stop_rb = CTkLabel(self.tabs.tab('Player'), text=f'{settings["Stop_Key"]}: Stop Task', width=100,text_color="#EEEEEE", height=28, fg_color='#8E1616',corner_radius=5)
-        stop_rb.place(x=261,y=620)
-        debug_rb = CTkLabel(self.tabs.tab('Player'), text=f'{settings["Debug_Key"]}: Position Debug', width=100,text_color="#EEEEEE", height=28, fg_color='#8E1616',corner_radius=5)
-        debug_rb.place(x=372,y=620)
+        if settings.get("Kill_Task") == None:
+            settings.setdefault("Kill_Task", "f6")
+            update_settings(settings,settings_json_path)
         
+        position_rb = CTkButton(self.tabs.tab('Player'),command=lambda: self.pos_rb("hi"), text=f'{settings["Position_Key"]}: Position Roblox', text_color="#EEEEEE",hover_color="#841414",width=125, height=28, fg_color='#8E1616',corner_radius=5)
+        position_rb.place(x=15,y=620)
+        start_rb = CTkButton(self.tabs.tab('Player'),command=lambda: self.start_macro("hi"), text=f'{settings["Start_Key"]}: Run Task', width=100,text_color="#EEEEEE",hover_color="#841414", height=28, fg_color='#8E1616',corner_radius=5)
+        start_rb.place(x=150,y=620)
+        stop_rb = CTkButton(self.tabs.tab('Player'),command=lambda: self.stop_macro("hi"), text=f'{settings["Stop_Key"]}: Stop Task', width=100,text_color="#EEEEEE", hover_color="#841414",height=28, fg_color='#8E1616',corner_radius=5)
+        stop_rb.place(x=261,y=620)
+        debug_rb = CTkButton(self.tabs.tab('Player'),command=lambda: self.show_position_debug("hi"), text=f'{settings["Debug_Key"]}: Position Debug', width=100,text_color="#EEEEEE",hover_color="#841414", height=28, fg_color='#8E1616',corner_radius=5)
+        debug_rb.place(x=372,y=620)
+        kill_rb = CTkButton(self.tabs.tab('Player'), command=lambda: self.kill_macro("hi"),text=f'{settings["Kill_Task"]}: Kill Task', width=100,text_color="#EEEEEE",hover_color="#841414", height=28, fg_color='#8E1616',corner_radius=5)
+        kill_rb.place(x=497,y=620)
         donate = CTkButton(self.tabs.tab('Player'), text="Support Me!", width=260,text_color="#EEEEEE", height=28, fg_color='#8E1616',hover_color="#841414",corner_radius=5,command=lambda: webbrowser.open(url="https://linktr.ee/loxerex",new=0,autoraise=True))
         donate.place(x=820,y=620)
-
         # hotkeys
-        keyboard.add_hotkey(settings["Position_Key"], self.pos_rb)
-        keyboard.add_hotkey(settings["Start_Key"], self.start_macro)
-        keyboard.add_hotkey(settings["Stop_Key"], self.stop_macro)
-        keyboard.add_hotkey(settings["Debug_Key"], self.show_position_debug)
+        keyboard.on_press_key(settings["Position_Key"], self.pos_rb)
+        keyboard.on_press_key(settings["Start_Key"], self.start_macro)
+        keyboard.on_press_key(settings["Stop_Key"], self.stop_macro)
+        keyboard.on_press_key(settings["Debug_Key"], self.show_position_debug)
+        keyboard.on_press_key(settings["Kill_Task"], self.kill_macro)
         Thread(target=self.runtime_counter, daemon=True).start()
         Thread(target=self.upd_count, daemon=True).start()
         Thread(target=self.print_output, daemon=True).start()
@@ -564,7 +569,7 @@ class MainWindow():
             time.sleep(0.5)
         
         
-    def start_macro(self):
+    def start_macro(self, x):
         if self.task != "":
             self.run_event.clear()
             j = load_state()
@@ -577,14 +582,25 @@ class MainWindow():
                 self.task_process = Handler.run_task(self.path_to_task)
             update_state(j)
     
-    def stop_macro(self):
+    def stop_macro(self, x):
         self.run_event.set()
         j = load_state()
         j['running'] = False
         j['task_path'] = ""
         update_state(j)
-        
-    def pos_rb(self):
+    def kill_macro(self,x):
+        self.run_event.set()
+        j = load_state()
+        j['running'] = False
+        j['task_path'] = ""
+        try:
+            self.task_process.terminate()
+        except Exception:
+            pass
+        self.task_process = None
+        kill_pids()
+        update_state(j)    
+    def pos_rb(self, x):
         window = wt.get_window("Roblox") # Get roblox window
         roblox_window = window
         print(roblox_window)
@@ -592,7 +608,7 @@ class MainWindow():
         wt.move_window(roblox_window, self.roblox_cut_out.winfo_rootx()-15, self.roblox_cut_out.winfo_rooty()-32)
         wt.activate_window(window=window)
         time.sleep(0.5)
-    def show_position_debug(self):
+    def show_position_debug(self,x):
         print("debug")
         if self.config_path != "":
             self.show_debug = not self.show_debug
@@ -656,6 +672,7 @@ class MainWindow():
         self.app.mainloop()   
 Window = MainWindow()
 Window.start_app()
+
 
 
 
