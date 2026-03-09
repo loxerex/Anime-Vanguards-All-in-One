@@ -601,13 +601,16 @@ class MainWindow():
         kill_pids()
         update_state(j)    
     def pos_rb(self, x):
-        window = wt.get_window("Roblox") # Get roblox window
-        roblox_window = window
-        print(roblox_window)
-        wt.resize_window(roblox_window, 816, 638)  # Resize window
-        wt.move_window(roblox_window, self.roblox_cut_out.winfo_rootx()-15, self.roblox_cut_out.winfo_rooty()-32)
-        wt.activate_window(window=window)
-        time.sleep(0.5)
+        try:
+            window = wt.get_window("Roblox") # Get roblox window
+            roblox_window = window
+            print(roblox_window)
+            wt.resize_window(roblox_window, 816, 638)  # Resize window
+            wt.move_window(roblox_window, self.roblox_cut_out.winfo_rootx()-15, self.roblox_cut_out.winfo_rooty()-32)
+            wt.activate_window(window=window)
+            time.sleep(0.5)
+        except Exception as e:
+            print(e)
     def show_position_debug(self,x):
         print("debug")
         if self.config_path != "":
@@ -672,6 +675,7 @@ class MainWindow():
         self.app.mainloop()   
 Window = MainWindow()
 Window.start_app()
+
 
 
 
