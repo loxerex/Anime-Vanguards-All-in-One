@@ -226,7 +226,10 @@ def order_interpator(key,unit,action_index, other: bool | None = None):
             time.sleep(0.6)
             if other:
                 print("waiting for end")
-                while not any([[fd.does_exist("Victory.png",confidence=0.9,grayscale=True,region=(147+offset[0], 150+offset[1], 226+offset[0], 175+offset[1]))],[fd.does_exist("Failed.png",confidence=0.9,grayscale=True,region=(147+offset[0], 150+offset[1], 226+offset[0], 175+offset[1]))]]):
+                ended = False
+                while not ended:
+                    if fd.does_exist("Victory.png",confidence=0.9,grayscale=True,region=(147+offset[0], 150+offset[1], 226+offset[0], 175+offset[1])) or fd.does_exist("Failed.png",confidence=0.9,grayscale=True,region=(147+offset[0], 150+offset[1], 226+offset[0], 175+offset[1])):
+                        ended = True
                     time.sleep(1)
                 print("Found end")
                 time.sleep(3)
@@ -355,3 +358,4 @@ def main():
             fd.click(179+offset[0], 469+offset[1])
             return 
 main()
+
