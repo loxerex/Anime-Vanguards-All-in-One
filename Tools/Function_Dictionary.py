@@ -381,8 +381,9 @@ def use_ability(pos: tuple[int,int], ability: str, offset: tuple[int,int]):
         return
     
     if ability.upper().split('_')[0] == "MAGE":
-        click(base_ability[0]+offset[0], base_ability[1]+offset[1], delay=0.2)
-        time.sleep(1)
+        while not pyautogui.pixelMatchesColor(694+offset[0],165+offset[1],(255,255,255),tolerance=40):
+            click(base_ability[0]+offset[0], base_ability[1]+offset[1], delay=0.2)
+            time.sleep(1)
         alert = (409, 358)
         match ability.upper().split('_')[1]:
             case "1":
