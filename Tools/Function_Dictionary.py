@@ -388,6 +388,11 @@ def use_ability(pos: tuple[int,int], ability: str, offset: tuple[int,int]):
         match ability.upper().split('_')[1]:
             case "1":
                 while not does_exist("Alert.png",confidence=0.95,grayscale=True,region=(245+offset[0], 253+offset[1], 569+offset[0], 391+offset[1])):
+                    if not pyautogui.pixelMatchesColor(694+offset[0],165+offset[1],(255,255,255),tolerance=40):
+                        select_unit(pos,offset)
+                        while not pyautogui.pixelMatchesColor(694+offset[0],165+offset[1],(255,255,255),tolerance=40):
+                            click(base_ability[0]+offset[0], base_ability[1]+offset[1], delay=0.2)
+                            time.sleep(1)
                     if does_exist("Victory.png",confidence=0.9,grayscale=True,region=(147+offset[0], 150+offset[1], 226+offset[0], 175+offset[1])) or does_exist("Failed.png",confidence=0.9,grayscale=True,region=(147+offset[0], 150+offset[1], 226+offset[0], 175+offset[1])):
                         break
                     if load_state()["running"] == False:
@@ -399,6 +404,11 @@ def use_ability(pos: tuple[int,int], ability: str, offset: tuple[int,int]):
                 time.sleep(0.5)
             case "2":
                 while not does_exist("Alert.png",confidence=0.95,grayscale=True,region=(245+offset[0], 253+offset[1], 569+offset[0], 391+offset[1])):
+                    if not pyautogui.pixelMatchesColor(694+offset[0],165+offset[1],(255,255,255),tolerance=40):
+                        select_unit(pos,offset)
+                        while not pyautogui.pixelMatchesColor(694+offset[0],165+offset[1],(255,255,255),tolerance=40):
+                            click(base_ability[0]+offset[0], base_ability[1]+offset[1], delay=0.2)
+                            time.sleep(1)
                     if does_exist("Victory.png",confidence=0.9,grayscale=True,region=(147+offset[0], 150+offset[1], 226+offset[0], 175+offset[1])) or does_exist("Failed.png",confidence=0.9,grayscale=True,region=(147+offset[0], 150+offset[1], 226+offset[0], 175+offset[1])):
                         break
                     if load_state()["running"] == False:
@@ -410,6 +420,11 @@ def use_ability(pos: tuple[int,int], ability: str, offset: tuple[int,int]):
                 time.sleep(0.5)
             case "3":
                 while not does_exist("Alert.png",confidence=0.95,grayscale=True,region=(245+offset[0], 253+offset[1], 569+offset[0], 391+offset[1])):
+                    if not pyautogui.pixelMatchesColor(694+offset[0],165+offset[1],(255,255,255),tolerance=40):
+                        select_unit(pos,offset)
+                        while not pyautogui.pixelMatchesColor(694+offset[0],165+offset[1],(255,255,255),tolerance=40):
+                            click(base_ability[0]+offset[0], base_ability[1]+offset[1], delay=0.2)
+                            time.sleep(1)
                     if does_exist("Victory.png",confidence=0.9,grayscale=True,region=(147+offset[0], 150+offset[1], 226+offset[0], 175+offset[1])) or does_exist("Failed.png",confidence=0.9,grayscale=True,region=(147+offset[0], 150+offset[1], 226+offset[0], 175+offset[1])):
                         break
                     if load_state()["running"] == False:
