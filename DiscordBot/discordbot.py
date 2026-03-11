@@ -87,7 +87,7 @@ async def rejoin_roblox(inter: discord.Interaction):
     if roblox_pid is None:
         return
     r_process = psutil.Process(roblox_pid)
-    subprocess.Popen([r_process.exe(), f"roblox://placeId={16146832113}&linkCode={""}/"])
+    subprocess.Popen([r_process.exe(), f"roblox://placeId={16146832113}&linkCode={load_json(os.path.join(os.path.dirname(os.path.dirname((os.path.abspath(__file__)))), "Settings", "AIO_Settings.json"))["Settings"]["Private_Server_Code"]}/"])
     window = wt.get_window("AIO")
     await asyncio.sleep(10)
     buffer = wt.screen_shot_memory(window=window)
@@ -111,5 +111,6 @@ async def close_aio(inter: discord.Interaction):
 
 def start():
     client.run(token=token)
+
 
 
