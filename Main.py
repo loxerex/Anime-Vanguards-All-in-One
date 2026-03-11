@@ -315,8 +315,9 @@ class MainWindow():
             settings.setdefault("Kill_Task", "f6")
             update_settings(settings,settings_json_path)
         if settings.get("Discord_Bot") == None:
-            settings.setdefault("Discord", False)
+            settings.setdefault("Discord_Bot", False)
             settings.setdefault("Discord_Server", 0)
+            
             update_settings(settings,settings_json_path)
         position_rb = CTkButton(self.tabs.tab('Player'),command=lambda: self.pos_rb("hi"), text=f'{settings["Position_Key"]}: Position Roblox', text_color="#EEEEEE",hover_color="#841414",width=125, height=28, fg_color='#8E1616',corner_radius=5)
         position_rb.place(x=15,y=620)
@@ -718,6 +719,7 @@ class MainWindow():
 
 Window = MainWindow()
 Window.start_app()
+
 
 
 
