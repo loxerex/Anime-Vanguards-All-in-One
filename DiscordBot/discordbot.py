@@ -87,7 +87,7 @@ async def rejoin_roblox(inter: discord.Interaction):
     if roblox_pid is None:
         return
     r_process = psutil.Process(roblox_pid)
-    subprocess.Popen([r_process.exe(), f"roblox://placeId={16146832113}&linkCode={21768692868330557785126702085399}/"])
+    subprocess.Popen([r_process.exe(), f"roblox://placeId={16146832113}&linkCode={""}/"])
     window = wt.get_window("AIO")
     await asyncio.sleep(10)
     buffer = wt.screen_shot_memory(window=window)
@@ -111,4 +111,5 @@ async def close_aio(inter: discord.Interaction):
 
 def start():
     client.run(token=token)
+
 
