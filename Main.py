@@ -20,6 +20,8 @@ import io
 import tkinter as tk
 import requests
 import difflib
+from DiscordBot import discordbot
+from DiscordBot import BotStates
 print_buffer = io.StringIO()
 class Logger:
     def __init__(self, level):
@@ -312,7 +314,10 @@ class MainWindow():
         if settings.get("Kill_Task") == None:
             settings.setdefault("Kill_Task", "f6")
             update_settings(settings,settings_json_path)
-        
+        if settings.get("Discord_Bot") == None:
+            settings.setdefault("Discord", False)
+            settings.setdefault("Discord_Server", 0)
+            update_settings(settings,settings_json_path)
         position_rb = CTkButton(self.tabs.tab('Player'),command=lambda: self.pos_rb("hi"), text=f'{settings["Position_Key"]}: Position Roblox', text_color="#EEEEEE",hover_color="#841414",width=125, height=28, fg_color='#8E1616',corner_radius=5)
         position_rb.place(x=15,y=620)
         start_rb = CTkButton(self.tabs.tab('Player'),command=lambda: self.start_macro("hi"), text=f'{settings["Start_Key"]}: Run Task', width=100,text_color="#EEEEEE",hover_color="#841414", height=28, fg_color='#8E1616',corner_radius=5)
@@ -335,6 +340,40 @@ class MainWindow():
         Thread(target=self.upd_count, daemon=True).start()
         Thread(target=self.print_output, daemon=True).start()
         
+        if settings["Discord_Bot"]:
+            Thread(target=discordbot.start,daemon=True).start()
+            BotStates.add_callback(self.on_change)
+    def on_change(self):
+        if BotStates.vars["kill"]:
+            print("Killing macro")
+            self.kill_macro("hi")
+            BotStates.vars["kill"] = False
+        if BotStates.vars["run"]:
+            print("Run Macro")
+            self.start_macro("hi")
+            BotStates.vars["run"] = False
+        if BotStates.vars["set_task"][0]:
+            BotStates.vars["set_task"][0] = False
+            Gamemode_Input = BotStates.vars["set_task"][1]
+            Stage_Input = BotStates.vars["set_task"][2]
+            Task_Folder = os.path.join(os.path.dirname(os.path.abspath(__file__)),"Tasks")
+            Gamemodes = [gamemode for gamemode in os.listdir(Task_Folder)]
+            gamemode_match = difflib.get_close_matches(Gamemode_Input.capitalize(),Gamemodes,cutoff=0.6)
+            gamemode_prob = max([( difflib.SequenceMatcher(None, Gamemode_Input,match).quick_ratio(), match) for match in gamemode_match])
+            Stages = [stage.replace("_0.py","") for stage in os.listdir(os.path.join(Task_Folder,gamemode_prob[1]))]
+            stage_match = difflib.get_close_matches(Stage_Input.capitalize().replace(" ","_"),Stages,cutoff=0.6)
+            stage_prob = max([( difflib.SequenceMatcher(None, Stage_Input.replace(" ","_"),stage).quick_ratio(), stage) for stage in stage_match])
+            if len(stage_prob) != 0 and len(gamemode_prob) !=0:
+                found_path = os.path.join(Task_Folder, gamemode_prob[1], stage_prob[1]+"_0.py")
+                print(f"Found Path: {found_path}")
+                new_task = found_path.split("\\")[-1]
+                self.set_task(new_task)
+
+            print(f"set task {BotStates.vars["set_task"][1]}")
+        if BotStates.vars["exit"]:
+            kill_pids()
+            closing(self.app)
+            
     def import_config(self):
         if not self.is_open_ds:
             self.is_open_ds = True
@@ -570,6 +609,7 @@ class MainWindow():
         
         
     def start_macro(self, x):
+        print(x)
         if self.task != "":
             self.run_event.clear()
             j = load_state()
@@ -673,6 +713,9 @@ class MainWindow():
     
     def start_app(self):
         self.app.mainloop()   
+
+
+
 Window = MainWindow()
 Window.start_app()
 
