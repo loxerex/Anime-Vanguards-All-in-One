@@ -294,6 +294,10 @@ def select_unit(unit: tuple[int,int], offset: tuple[int,int]):
         if load_state()["running"] == False:
             while not load_state()["running"]:
                 time.sleep(0.5)
+        if does_exist("Alert.png",confidence=0.8,grayscale=True,region=(245+offset[0], 253+offset[1], 569+offset[0], 391+offset[1])):
+            alert = (409, 358)
+            click(alert[0]+offset[0],alert[1]+offset[1])
+            break
         click(unit[0]+offset[0], unit[1]+offset[1], delay=0.67)
         if timeout <= 0:
             print("select unit timeout failure")
@@ -391,11 +395,11 @@ def use_ability(pos: tuple[int,int], ability: str, offset: tuple[int,int]):
         alert = (409, 358)
         match ability.upper().split('_')[1]:
             case "1":
-                while not does_exist("Alert.png",confidence=0.95,grayscale=True,region=(245+offset[0], 253+offset[1], 569+offset[0], 391+offset[1])):
+                while not does_exist("Alert.png",confidence=0.8,grayscale=True,region=(245+offset[0], 253+offset[1], 569+offset[0], 391+offset[1])):
                     if not pyautogui.pixelMatchesColor(694+offset[0],165+offset[1],(255,255,255),tolerance=40):
                         select_unit(pos,offset)
                         while not pyautogui.pixelMatchesColor(694+offset[0],165+offset[1],(255,255,255),tolerance=40):
-                            if does_exist("Alert.png",confidence=0.95,grayscale=True,region=(245+offset[0], 253+offset[1], 569+offset[0], 391+offset[1])):
+                            if does_exist("Alert.png",confidence=0.8,grayscale=True,region=(245+offset[0], 253+offset[1], 569+offset[0], 391+offset[1])):
                                 click(alert[0]+offset[0],alert[1]+offset[1])
                                 break
                             click(base_ability[0]+offset[0], base_ability[1]+offset[1], delay=0.2)
@@ -410,11 +414,11 @@ def use_ability(pos: tuple[int,int], ability: str, offset: tuple[int,int]):
                 click(alert[0]+offset[0],alert[1]+offset[1])
                 time.sleep(0.5)
             case "2":
-                while not does_exist("Alert.png",confidence=0.95,grayscale=True,region=(245+offset[0], 253+offset[1], 569+offset[0], 391+offset[1])):
+                while not does_exist("Alert.png",confidence=0.8,grayscale=True,region=(245+offset[0], 253+offset[1], 569+offset[0], 391+offset[1])):
                     if not pyautogui.pixelMatchesColor(694+offset[0],165+offset[1],(255,255,255),tolerance=40):
                         select_unit(pos,offset)
                         while not pyautogui.pixelMatchesColor(694+offset[0],165+offset[1],(255,255,255),tolerance=40):
-                            if does_exist("Alert.png",confidence=0.95,grayscale=True,region=(245+offset[0], 253+offset[1], 569+offset[0], 391+offset[1])):
+                            if does_exist("Alert.png",confidence=0.8,grayscale=True,region=(245+offset[0], 253+offset[1], 569+offset[0], 391+offset[1])):
                                 click(alert[0]+offset[0],alert[1]+offset[1])
                                 break
                             click(base_ability[0]+offset[0], base_ability[1]+offset[1], delay=0.2)
@@ -429,11 +433,11 @@ def use_ability(pos: tuple[int,int], ability: str, offset: tuple[int,int]):
                 click(alert[0]+offset[0],alert[1]+offset[1])
                 time.sleep(0.5)
             case "3":
-                while not does_exist("Alert.png",confidence=0.95,grayscale=True,region=(245+offset[0], 253+offset[1], 569+offset[0], 391+offset[1])):
+                while not does_exist("Alert.png",confidence=0.8,grayscale=True,region=(245+offset[0], 253+offset[1], 569+offset[0], 391+offset[1])):
                     if not pyautogui.pixelMatchesColor(694+offset[0],165+offset[1],(255,255,255),tolerance=40):
                         select_unit(pos,offset)
                         while not pyautogui.pixelMatchesColor(694+offset[0],165+offset[1],(255,255,255),tolerance=40):
-                            if does_exist("Alert.png",confidence=0.95,grayscale=True,region=(245+offset[0], 253+offset[1], 569+offset[0], 391+offset[1])):
+                            if does_exist("Alert.png",confidence=0.8,grayscale=True,region=(245+offset[0], 253+offset[1], 569+offset[0], 391+offset[1])):
                                 click(alert[0]+offset[0],alert[1]+offset[1])
                                 break
                             click(base_ability[0]+offset[0], base_ability[1]+offset[1], delay=0.2)
