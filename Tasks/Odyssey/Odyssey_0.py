@@ -87,7 +87,7 @@ def main():
         if any([fd.does_exist("Leaderboard_Check.png",confidence=0.8,grayscale=True,region=(543+offset[0], 87+offset[1], 797+offset[0], 191+offset[1])), fd.does_exist("LB_Check2.png",confidence=0.8,grayscale=True,region=(543+offset[0], 87+offset[1], 797+offset[0], 191+offset[1]))]):
             pydirectinput.press("tab")
         oddysey_path()
-        auto_play_pressed = False
+        
         wait_for_spawn(offset)
         if load_aio_settings()["Click_Chat"]:
             if not load_aio_settings()["VC_CHAT"]:
@@ -99,6 +99,7 @@ def main():
         if any([fd.does_exist("Leaderboard_Check.png",confidence=0.8,grayscale=True,region=(543+offset[0], 87+offset[1], 797+offset[0], 191+offset[1])), fd.does_exist("LB_Check2.png",confidence=0.8,grayscale=True,region=(543+offset[0], 87+offset[1], 797+offset[0], 191+offset[1]))]):
             pydirectinput.press("tab")
         for match in range(4):
+            auto_play_pressed = False
             print(f"Starting match {match+1}")
             while not load_state()["running"]:
                 time.sleep(0.5)
@@ -110,6 +111,10 @@ def main():
             if fd.does_exist("Odyssey\\Autoplay.png", confidence=0.9, grayscale=True,region=(631+offset[0], 366+offset[1], 805+offset[0], 472+offset[1])):
                 fd.click(auto_play[0]+offset[0],auto_play[1]+offset[1])
             while fd.get_wave(offset) < 15:
+                if auto_play_pressed and fd.does_exist("Odyssey\\Autoplay.png", confidence=0.9, grayscale=True,region=(631+offset[0], 366+offset[1], 805+offset[0], 472+offset[1])):
+                    fd.click(auto_play[0]+offset[0],auto_play[1]+offset[1])
+                else:
+                    auto_play_pressed = True
                 while not load_state()["running"]:
                     time.sleep(0.5)
                 if fd.does_exist("VoteStart.png",confidence=0.9,grayscale=True,region=region):
@@ -162,4 +167,3 @@ def main():
                     time.sleep(0.5)
         time.sleep(0.1)
 main()
-
