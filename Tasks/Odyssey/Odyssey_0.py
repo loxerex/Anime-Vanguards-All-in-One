@@ -108,11 +108,8 @@ def main():
             while fd.does_exist("VoteStart.png",confidence=0.9,grayscale=True,region=region):
                 fd.start(offset)
                 time.sleep(0.3)
-            if fd.does_exist("Odyssey\\Autoplay.png", confidence=0.9, grayscale=True,region=(631+offset[0], 366+offset[1], 805+offset[0], 472+offset[1])):
-                fd.click(auto_play[0]+offset[0],auto_play[1]+offset[1])
+            fd.click(auto_play[0]+offset[0],auto_play[1]+offset[1])
             while fd.get_wave(offset) < 15:
-                if fd.does_exist("Odyssey\\Autoplay.png", confidence=0.9, grayscale=True,region=(631+offset[0], 366+offset[1], 805+offset[0], 472+offset[1])):
-                    fd.click(auto_play[0]+offset[0],auto_play[1]+offset[1])
                 while not load_state()["running"]:
                     time.sleep(0.5)
                 if fd.does_exist("VoteStart.png",confidence=0.9,grayscale=True,region=region):
@@ -125,8 +122,6 @@ def main():
                     Thread(target=fd.click, args=[skip_wave[0]+offset[0],skip_wave[1]+offset[1]], kwargs={"delay": 0.05}).start()
                 time.sleep(0.5)
             print("Waiting for intensity card")
-            if fd.does_exist("Odyssey\\Autoplay.png", confidence=0.9, grayscale=True,region=(631+offset[0], 366+offset[1], 805+offset[0], 472+offset[1])):
-                fd.click(auto_play[0]+offset[0],auto_play[1]+offset[1])
             while not fd.does_exist("Odyssey\\Intensity.png",confidence=0.9,grayscale=True,region=(613+offset[0], 213+offset[1], 782+offset[0], 348+offset[1])):
                 if fd.does_exist("Failed.png",confidence=0.9,grayscale=True,region=(147+offset[0], 150+offset[1], 226+offset[0], 175+offset[1])):
                     break
