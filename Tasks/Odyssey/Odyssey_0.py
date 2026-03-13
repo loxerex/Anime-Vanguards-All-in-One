@@ -111,10 +111,11 @@ def main():
             if fd.does_exist("Odyssey\\Autoplay.png", confidence=0.9, grayscale=True,region=(631+offset[0], 366+offset[1], 805+offset[0], 472+offset[1])):
                 fd.click(auto_play[0]+offset[0],auto_play[1]+offset[1])
             while fd.get_wave(offset) < 15:
-                if auto_play_pressed and fd.does_exist("Odyssey\\Autoplay.png", confidence=0.9, grayscale=True,region=(631+offset[0], 366+offset[1], 805+offset[0], 472+offset[1])):
+                if not auto_play_pressed and fd.does_exist("Odyssey\\Autoplay.png", confidence=0.9, grayscale=True,region=(631+offset[0], 366+offset[1], 805+offset[0], 472+offset[1])):
                     fd.click(auto_play[0]+offset[0],auto_play[1]+offset[1])
                 else:
-                    auto_play_pressed = True
+                    if not fd.does_exist("Odyssey\\Autoplay.png", confidence=0.9, grayscale=True,region=(631+offset[0], 366+offset[1], 805+offset[0], 472+offset[1])):
+                        auto_play_pressed = True
                 while not load_state()["running"]:
                     time.sleep(0.5)
                 if fd.does_exist("VoteStart.png",confidence=0.9,grayscale=True,region=region):
