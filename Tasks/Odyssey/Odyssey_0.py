@@ -123,29 +123,43 @@ def main():
                 time.sleep(0.5)
             print("Waiting for intensity card")
             while not fd.does_exist("Odyssey\\Intensity.png",confidence=0.9,grayscale=True,region=(613+offset[0], 213+offset[1], 782+offset[0], 348+offset[1])):
+                if fd.does_exist("Failed.png",confidence=0.9,grayscale=True,region=(147+offset[0], 150+offset[1], 226+offset[0], 175+offset[1])):
+                    break
                 time.sleep(0.2)
             fd.click(695+offset[0], 304+offset[1],delay=0.5)
             while not fd.does_exist("Victory.png",confidence=0.9,grayscale=True,region=(147+offset[0], 150+offset[1], 226+offset[0], 175+offset[1])):
+                if fd.does_exist("Failed.png",confidence=0.9,grayscale=True,region=(147+offset[0], 150+offset[1], 226+offset[0], 175+offset[1])):
+                    break
                 while not load_state()["running"]:
                     time.sleep(0.5)
                 time.sleep(0.3)
             print("Going to next match")
             sent_win = False
-            while fd.does_exist("Victory.png",confidence=0.75,grayscale=True,region=(147+offset[0], 150+offset[1], 226+offset[0], 175+offset[1])):
-                while not load_state()["running"]:
+            if fd.does_exist("Failed.png",confidence=0.9,grayscale=True,region=(147+offset[0], 150+offset[1], 226+offset[0], 175+offset[1])):
+                sent_win = True
+                add_data =  load_state()
+                add_data["num_runs"]+=1
+                add_data["losses"]+=1
+                update_state(add_data)
+                time.sleep(1)
+                fd.click(return_to_lobby[0]+offset[0],return_to_lobby[1]+offset[1],delay=0.2)
+                break
+            if not sent_win:    
+                while fd.does_exist("Victory.png",confidence=0.75,grayscale=True,region=(147+offset[0], 150+offset[1], 226+offset[0], 175+offset[1])):
+                    while not load_state()["running"]:
+                        time.sleep(0.5)
+                    if match < 3:
+                        fd.click(371+offset[0], 472+offset[1],delay=0.2)
+                    else:
+                        if not sent_win:
+                            sent_win = True
+                            add_data =  load_state()
+                            add_data["num_runs"]+=1
+                            add_data["wins"]+=1
+                            update_state(add_data)
+                            time.sleep(1)
+                        fd.click(return_to_lobby[0]+offset[0],return_to_lobby[1]+offset[1],delay=0.2)
                     time.sleep(0.5)
-                if match < 3:
-                    fd.click(371+offset[0], 472+offset[1],delay=0.2)
-                else:
-                    if not sent_win:
-                        sent_win = True
-                        add_data =  load_state()
-                        add_data["num_runs"]+=1
-                        add_data["wins"]+=1
-                        update_state(add_data)
-                        time.sleep(1)
-                    fd.click(return_to_lobby[0]+offset[0],return_to_lobby[1]+offset[1],delay=0.2)
-                time.sleep(0.5)
         time.sleep(0.1)
 main()
 
