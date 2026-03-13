@@ -103,13 +103,12 @@ def main():
             while not load_state()["running"]:
                 time.sleep(0.5)
             wait_for_spawn(offset)
-            if not auto_play_pressed:
-                auto_play_pressed = True
-                fd.click(auto_play[0]+offset[0],auto_play[1]+offset[1])
             region = (442+offset[0], 109+offset[1], 506+offset[0], 143+offset[1])
             while fd.does_exist("VoteStart.png",confidence=0.9,grayscale=True,region=region):
                 fd.start(offset)
                 time.sleep(0.3)
+            if fd.does_exist("Odyssey\\Autoplay.png", confidence=0.9, grayscale=True,region=(631+offset[0], 366+offset[1], 805+offset[0], 472+offset[1])):
+                fd.click(auto_play[0]+offset[0],auto_play[1]+offset[1])
             while fd.get_wave(offset) < 15:
                 while not load_state()["running"]:
                     time.sleep(0.5)
