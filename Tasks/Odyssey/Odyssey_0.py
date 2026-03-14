@@ -127,7 +127,7 @@ def main():
                     break
                 time.sleep(0.2)
             fd.click(695+offset[0], 304+offset[1],delay=0.5)
-            while not fd.does_exist("Victory.png",confidence=0.9,grayscale=True,region=(147+offset[0], 150+offset[1], 226+offset[0], 175+offset[1])) or any([pyautogui.pixelMatchesColor(x=427+offset[0],y=471+offset[1],expectedRGBColor=(15,253,60),tolerance=5)],[pyautogui.pixelMatchesColor(x=427+offset[0],y=471+offset[1],expectedRGBColor=(12,198,47),tolerance=5)]):
+            while not fd.does_exist("Victory.png",confidence=0.9,grayscale=True,region=(147+offset[0], 150+offset[1], 226+offset[0], 175+offset[1])) or any([pyautogui.pixelMatchesColor(x=427+offset[0],y=471+offset[1],expectedRGBColor=(15,253,60),tolerance=5),pyautogui.pixelMatchesColor(x=427+offset[0],y=471+offset[1],expectedRGBColor=(12,198,47),tolerance=5)]):
                 if fd.does_exist("Failed.png",confidence=0.9,grayscale=True,region=(147+offset[0], 150+offset[1], 226+offset[0], 175+offset[1])) or pyautogui.pixelMatchesColor(x=394+offset[0],y=157+offset[1],expectedRGBColor=(255,19,23)):
                     break
                 while not load_state()["running"]:
@@ -145,7 +145,7 @@ def main():
                 fd.click(return_to_lobby[0]+offset[0],return_to_lobby[1]+offset[1],delay=0.2)
                 break
             if not sent_win:    
-                while fd.does_exist("Victory.png",confidence=0.75,grayscale=True,region=(147+offset[0], 150+offset[1], 226+offset[0], 175+offset[1])) or any([pyautogui.pixelMatchesColor(x=427+offset[0],y=471+offset[1],expectedRGBColor=(15,253,60),tolerance=5)],[pyautogui.pixelMatchesColor(x=427+offset[0],y=471+offset[1],expectedRGBColor=(12,198,47),tolerance=5)]):
+                while fd.does_exist("Victory.png",confidence=0.75,grayscale=True,region=(147+offset[0], 150+offset[1], 226+offset[0], 175+offset[1])) or any([pyautogui.pixelMatchesColor(x=427+offset[0],y=471+offset[1],expectedRGBColor=(15,253,60),tolerance=5),pyautogui.pixelMatchesColor(x=427+offset[0],y=471+offset[1],expectedRGBColor=(12,198,47),tolerance=5)]):
                     while not load_state()["running"]:
                         time.sleep(0.5)
                     if match < 3:
