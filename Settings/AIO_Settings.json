@@ -5,6 +5,9 @@
     "Debug_Key": "f5",
     "Click_Chat": true,
     "VC_CHAT": false,
+    "Kill_Task": "f6",
+    "Discord_Bot": false,
+    "Discord_Server": 0,
     "Unit_Settings":{
         "Placement_Delay": 1.0
     },
