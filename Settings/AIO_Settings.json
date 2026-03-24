@@ -30,6 +30,21 @@
             "Press_It"
         ]
     },
+    "Bleach_Dungeon": {
+        "Bleach_Card": "Fisticuffs",
+        "Bleach_Card_Priority": [
+            "Harvest",
+            "Champ",
+            "Press_It",
+            "Range",
+            "Damage",
+            "Strong",
+            "Slayer",
+            "Loot",
+            "Dodge",
+            "Cooldown"
+        ]
+    },
     "Ant_Island": {
         "Ant_Island_Card": "Exterminator",
         "AI_Card_Priority": [
