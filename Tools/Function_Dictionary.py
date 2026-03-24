@@ -240,6 +240,7 @@ def place_unit(unit: int, pos : tuple[int,int], offset: tuple[int,int], priority
     print(f"Placed {unit} at {pos}")
     
 def upgrade_unit(upgrade: str, pos : tuple[int,int], offset: tuple[int,int]):
+    upgrade = str(upgrade)
     selected = select_unit(pos, offset)
     if not selected:
         return False
