@@ -46,7 +46,9 @@ def card_check():
                 time.sleep(2)
                 for card in card_priority:
                     if fd.does_exist(f"BleachDungeon\\{card}.png",confidence=0.8,grayscale=True,region=(42+offset[0], 180+offset[1], 781+offset[0], 464+offset[1])):
-                        fd.click_image(f"BleachDungeon\\{card}.png",confidence=0.8,grayscale=True,region=(42+offset[0], 180+offset[1], 781+offset[0], 464+offset[1]),offset=(0,0))
+                        while fd.does_exist(f"BleachDungeon\\{card}.png",confidence=0.8,grayscale=True,region=(42+offset[0], 180+offset[1], 781+offset[0], 464+offset[1])):
+                            fd.click_image(f"BleachDungeon\\{card}.png",confidence=0.8,grayscale=True,region=(42+offset[0], 180+offset[1], 781+offset[0], 464+offset[1]),offset=(0,0))
+                            time.sleep(0.6)
                         break
                     else:
                         print(f"Couldn't find card {card}")
