@@ -1425,7 +1425,7 @@ def main():
         get_monarch()
         secure_select(Mirko_Placements[0])
         close_unit()
-
+        time.sleep(30)
         buy_lanes()
         buy_upgrade("damage",path=True,return_to_spawn=False)
         buy_upgrade("speed",path=False,return_to_spawn=False)
