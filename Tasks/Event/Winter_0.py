@@ -1119,6 +1119,7 @@ def lootbox(ainz: bool, erza: bool, beni: bool, erza_buff: bool):
                 fd.upgrade_unit("5",pos=Erza_Placements[2],offset=offset)
                 fd.use_ability(Erza_Placements[2],"MAGE_3",offset=offset)
                 erza_buff = False
+                path_winter(3,0)
 
         if not Erza_Upgraded:
                 if Unit_Placements_Left["Erza"] == 0:
