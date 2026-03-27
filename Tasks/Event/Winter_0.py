@@ -1397,10 +1397,8 @@ def main():
         # Endgame / Runtime:
         # - end_loop(wave)
         buy_mirko(2)
-        place_unit("Mirko", Mirko_Placements[0],close=True)
-
         fd.start(offset)
-
+        place_unit("Mirko", Mirko_Placements[0],close=True)
         place_unit("Mirko", Mirko_Placements[1],close=True)
         buy_mirko(1)
         place_unit("Mirko", Mirko_Placements[2],close=True)
